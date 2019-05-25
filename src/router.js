@@ -5,7 +5,7 @@ import Products from './pages/Products.vue'
 Vue.use(Router)
 
 export default new Router({
-  base: '/Products',
+  base: '/',
   routes: [
     {
       path: '/products',
