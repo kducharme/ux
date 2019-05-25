@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <img alt="TaxJar logo" src="../assets/taxjar.svg" />
-    <router-link @click.native="resetActive" to="/products" exact>Products</router-link>
+    <img alt="TaxJar logo" src="../assets/taxjar.svg" class='logo' />
+    <!-- <router-link @click.native="resetActive" to="/products" exact>Products</router-link> -->
   </nav>
 </template>
 
@@ -14,8 +14,14 @@ export default {
 
 <style lang="scss">
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+nav {
+  height: 50px;
 }
+
+.logo {
+  height: 30px;
+  width: auto;
+}
+
 </style>
 
