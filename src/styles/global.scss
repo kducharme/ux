@@ -1,0 +1,42 @@
+@import 'variables';
+@import 'mixins';
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+// Fonts
+h1, h2, h3, h4, h5, p, a, label, button, div {
+    font-family: $fontPrimary;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+}
+
+.button__primary {
+    background-color: #3B60E4;
+    border-radius: 3px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .3px;
+}
+
+// Inputs and buttons
+button:hover, button:active, button:focus, a:hover, a:focus, input:focus, input:active, textarea:active, textarea:focus {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}

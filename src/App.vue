@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/taxjar.svg">
-    <Products />
+    <nav>
+      <img alt="TaxJar logo" src="./assets/taxjar.svg" class="logo">
+      <router-link to="/products" exact>Products</router-link>
+    </nav>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Products from './pages/Products.vue'
+import Products from "./pages/Products.vue";
+import PrimaryNavigation from "./components/PrimaryNavigation.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    Products
+    Products,
+    PrimaryNavigation
   }
-}
+};
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import "./styles/global.scss";
+
+* {
+  margin: 0;
 }
 </style>
