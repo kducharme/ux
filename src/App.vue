@@ -30,9 +30,8 @@ export default {
 
 <style lang="scss">
 @import "./styles/global.scss";
-@import './styles/mixins.scss';
-@import './styles/variables.scss';
-
+@import "./styles/mixins.scss";
+@import "./styles/variables.scss";
 
 nav {
   height: 60px;
@@ -46,16 +45,19 @@ nav {
   }
   a {
     color: #7a7b7d;
-    padding-left: 32px;
+    padding: 0 16px;
     font-weight: $weightLight;
     font-size: 15px;
   }
   a:hover {
     color: $colorFontDark;
   }
-  .router-link-active {
-      font-weight: $weightMedium;
-      color: $colorTaxJar;
-    }
+  a:last-child {
+    padding: 0 0 0 16px;
+  }
+  .router-link-active, .router-link-active:hover {
+    font-weight: $weightMedium;
+    color: $colorTaxJar;
+  }
 }
 </style>
