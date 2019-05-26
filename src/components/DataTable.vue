@@ -1,27 +1,33 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <p>hi</p>
+    <div v-for="product in products" :key="product.id">
+      <p>{{product.name}}</p>
+    </div>
+  </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   name: "DataTable",
   components: {},
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    ...mapActions(["getProducts"]),
+    getProductData: function() {
+      this.getProducts();
+    }
+  },
+  computed: {
+    ...mapState(["products"])
+  },
+  beforeMount() {
+    this.getProductData();
+  }
 };
 </script>
 
