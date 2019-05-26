@@ -1,10 +1,28 @@
 <template>
-  <div>
-    <p>hi</p>
-    <div v-for="product in products" :key="product.id">
-      <p>{{product.name}}</p>
-    </div>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <!-- <th>
+          <input type="checkbox">
+        </th>-->
+        <th>Product name</th>
+        <th>SKU</th>
+        <th>Cateogry</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="product in products" :key="product.id">
+        <!-- <td>
+          <input type="checkbox">
+        </td>-->
+        <td>{{ product.name }}</td>
+        <td>{{ product.sku }}</td>
+        <td>
+          <div :class="[product.category === 'Uncategorized' ? 'uncategorized' : 'categorized']">{{ product.category }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
@@ -36,9 +54,48 @@ export default {
 @import "../styles/mixins.scss";
 
 table {
+  margin-top: 32px;
   width: 100%;
+  border: 1px solid $grayBorder;
+  background: white;
+  border-spacing: 0px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: $weightLight;
   thead {
-    height: 30px;
+    text-align: left;
+    background-color: $grayBackground;
+    border: none !important;
+    border-bottom: 1px solid $grayBorder;
+    color: $colorFontLight;
+    font-weight: $weightHeavy;
+    tr {
+      height: 48px;
+      border: none;
+    }
+    th {
+      padding: 0 16px;
+      border-bottom: 1px solid $grayBorder;
+    }
+  }
+  tbody {
+    tr {
+      height: 44px;
+    }
+    td {
+      color: $colorFontDark;
+      border-bottom: 1px solid $grayBorder;
+      padding: 0 16px;
+    }
+    .uncategorized {
+      background: #eeeeee;
+      color: $colorFontLight;
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: $weightMedium;
+      
+    }
   }
 }
 </style>
