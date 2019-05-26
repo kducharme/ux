@@ -14,9 +14,7 @@
       <div class="header__bottom">
         <div class="announcement">
           <img alt="warning" src="../assets/warn.svg">
-          <p>
-            <span>You have 43 uncategorized products</span>. Please categorize your products now to ensure that the correct tax code is applied.
-          </p>
+          <p>{{ announcement }}</p>
         </div>
       </div>
     </div>
@@ -26,23 +24,25 @@
       <button>Uncategorized</button>
     </div>
     <div class="content">
-      <router-view/>
+      <DataTable />
     </div>
   </div>
 </template>
 
 <script>
+import DataTable from "../components/DataTable.vue";
+
 export default {
   name: "products",
-  components: {},
-  // data() {
-  //   return {
-  //     activeTab: ''
-  //   }
-  // },
-  // methods: {
-  //   setActiveTab: this.activeTab
-  // }
+  components: { DataTable },
+  data() {
+    return {
+      activeTab: 'all',
+      announcement: 'You have 43 uncategorized products. Please categorize your products now to ensure that the correct tax code is applied.'
+    }
+  },
+  methods: {
+  }
 };
 </script>
 
@@ -96,10 +96,9 @@ export default {
       .announcement {
         @include display-flex(flex-start, center, row);
         background: $colorFailureLight;
-        height: 40px;
-        border-left: 4px solid $colorFailure;
+        height: 48px;
         border-radius: 3px;
-        padding: 0 16px;
+        padding: 0 20px;
       }
       img {
         padding-right: 12px;
@@ -129,7 +128,8 @@ export default {
     }
   }
   .content {
-    background: white;
+    padding: 0 180px;
+    
   }
 }
 </style>
