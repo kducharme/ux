@@ -4,7 +4,7 @@
       <div class="header__top">
         <div class="header__top--left">
           <h1>Products</h1>
-          <p>Categorize your products</p>
+          <p>TaxJar product taxability tool</p>
         </div>
         <div class="header__top--right">
           <button>Request catagory</button>
@@ -15,14 +15,15 @@
         <div class="announcement">
           <img alt="warning" src="../assets/warn.svg">
           <p>
-            You have
-            <span>43 uncategorized products</span>. Please categorize your products now to ensure that the correct tax code is applied.
+            <span>You have 43 uncategorized products</span>. Please categorize your products now to ensure that the correct tax code is applied.
           </p>
         </div>
       </div>
     </div>
     <div class="filter">
-      <router-link :to="'/products/' + activeTab">All products</router-link>
+      <button class='active'>All products</button>
+      <button>Categorized</button>
+      <button>Uncategorized</button>
     </div>
     <div class="content">
       <router-view/>
@@ -54,9 +55,9 @@ export default {
   background: $grayBackground;
 
   .header {
-    padding: 48px 180px 56px;
+    padding: 48px 180px 32px;
     background: white;
-    border-bottom: 1px solid $grayBorder;
+    // border-bottom: 1px solid $grayBorder;
     @include display-flex(flex-start, center, column);
     .header__top {
       width: 100%;
@@ -75,9 +76,9 @@ export default {
         width: 50%;
         @include display-flex(flex-end, center, row);
         button {
-          border: 1.5px solid $grayButtonBorder;
-          font-size: 15px;
-          height: 46px;
+          border: 1px solid $grayButtonBorder;
+          font-size: 14px;
+          height: 40px;
           padding: 0 16px;
           border-radius: 3px;
           margin-left: 16px;
@@ -91,17 +92,17 @@ export default {
     }
     .header__bottom {
       width: 100%;
-      margin-top: 24px;
+      margin-top: 32px;
       .announcement {
         @include display-flex(flex-start, center, row);
         background: $colorFailureLight;
         height: 40px;
-        border-left: 3px solid $colorFailure;
+        border-left: 4px solid $colorFailure;
         border-radius: 3px;
-        padding: 0 12px;
+        padding: 0 16px;
       }
       img {
-        padding-right: 6px;
+        padding-right: 12px;
       }
       p {
         color: $colorFailure;
@@ -112,9 +113,20 @@ export default {
     }
   }
   .filter {
-    height: 56px;
+    @include display-flex(flex-start, center, row);
     border-bottom: 1px solid $grayBorder;
     background: white;
+    padding: 0 180px;
+    button {
+      color: $colorFontLight;
+      margin-right: 16px;
+      padding-bottom: 16px;
+    }
+    .active {
+      color: $colorTaxJar;
+      border-bottom: 3px solid $colorTaxJar;
+      font-weight: $weightHeavy;
+    }
   }
   .content {
     background: white;

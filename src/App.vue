@@ -55,7 +55,8 @@ nav {
   a:last-child {
     padding: 0 0 0 16px;
   }
-  .router-link-active, .router-link-active:hover {
+  .router-link-active,
+  .router-link-active:hover {
     font-weight: $weightMedium;
     color: $colorTaxJar;
   }
