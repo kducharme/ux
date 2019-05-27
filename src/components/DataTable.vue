@@ -6,7 +6,7 @@
     </div>
     <table>
       <colgroup>
-        <col span="1" style="width: 4%;">
+        <col span="1" style="width: 3.5%;">
         <col span="1" style="width: 58;">
         <col span="1" style="width: 10%;">
         <col span="1" style="width: 15%; min-width: 110px;">
@@ -25,10 +25,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in tableResults" :key="product.index">
-          <td>
+        <tr v-for="product in tableResults" :key="product.index" :class="[selectedProducts.includes(product.index) ? 'selectedRow' : '']">
+          <td  >
             <div class="product__select">
-              <input type="checkbox" :value="product.index" :id="product.index">
+              <input type="checkbox" :value="product.index" :id="product.index" v-model="selectedProducts">
               <label :for="product.index"></label>
             </div>
           </td>
@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       allProducts: "",
+      selectedProducts: [],
       search: ""
     };
   },
@@ -89,6 +90,9 @@ export default {
 .table__header {
   @include display-flex(space-between, center, row);
   margin: 24px 0;
+  p {
+    color: $colorFontLight;
+  }
   input {
     height: 32px;
     width: 280px;
@@ -131,6 +135,9 @@ table {
       border-bottom: 1px solid $grayBorder;
       padding: 0 16px;
     }
+    .selectedRow {
+      background: $colorBlueLight;
+    }
     .product__name {
       white-space: nowrap;
       overflow: hidden;
@@ -169,8 +176,8 @@ table {
   position: absolute;
   left: 0;
   top: 0;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border: 1.5px solid #0b5c98;
   background: #0b5c98;
   border-radius: 3px;
@@ -181,8 +188,8 @@ table {
   position: absolute;
   left: 0;
   top: 0;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border: 1.5px solid #b7b7b8;
   border-radius: 3px;
 }
@@ -190,7 +197,7 @@ table {
 /* checked mark aspect */
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
-  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  fill='white' width='22' height='20' stroke='white' stroke-width='.8' viewBox='0 0 26 26'><path d='M9 16.17L5.53 12.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L9 16.17z'/></svg>");
+  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  fill='white' width='20' height='18' stroke='white' stroke-width='.8' viewBox='0 0 26 26'><path d='M9 16.17L5.53 12.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L9 16.17z'/></svg>");
   position: absolute;
   top: 0em;
   left: -0.1em;
