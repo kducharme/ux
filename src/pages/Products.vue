@@ -55,7 +55,7 @@ export default {
   background: $grayBackground;
 
   .header {
-    padding: 48px 240px 32px;
+    padding: 40px 240px 32px;
     background: white;
     @include display-flex(flex-start, center, column);
     .header__top {
@@ -129,6 +129,7 @@ export default {
   .content {
     padding: 0 240px;
     height: 100%;
+    min-height: calc(100vh - 320px);
     
   }
 }
