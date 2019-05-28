@@ -25,10 +25,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in tableResults" :key="product.index" :class="[selectedProducts.includes(product.index) ? 'selectedRow' : '']">
-          <td  >
+        <tr
+          v-for="product in tableResults"
+          :key="product.index"
+          :class="[selectedProducts.includes(product.index) ? 'selectedRow' : '']"
+        >
+          <td>
             <div class="product__select">
-              <input type="checkbox" :value="product.index" :id="product.index" v-model="selectedProducts">
+              <input
+                type="checkbox"
+                :value="product.index"
+                :id="product.index"
+                v-model="selectedProducts"
+              >
               <label :for="product.index"></label>
             </div>
           </td>
@@ -42,6 +51,13 @@
         </tr>
       </tbody>
     </table>
+    <div
+      :class="[selectedProducts.length === 0 ? 'hideActions' : 'showActions']"
+      class="table__actions"
+    >
+      <button>Add to category</button>
+      <p>{{selectedProducts.length}} products selected</p>
+    </div>
   </div>
 </template>
 
@@ -87,6 +103,39 @@ export default {
 @import "../styles/variables.scss";
 @import "../styles/mixins.scss";
 
+.table__actions {
+  @include display-flex(flex-start, center, row);
+  bottom: 0px;
+  width: 100%;
+  height: 56px;
+  background: white;
+  border: 1px solid $grayBorder;
+  position: -webkit-sticky;
+  position: sticky;
+  padding: 0 16px;
+  box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.25);
+  button {
+    background: $colorTaxJar;
+    height: 38px;
+    border-radius: 3px;
+    color: white;
+    font-weight: $weightMedium;
+    margin-right: 16px;
+    padding: 0 8px;
+  }
+}
+
+.showActions {
+  transform: translateY(0px);
+  transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
+}
+
+.hideActions {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
+}
+
 .table__header {
   @include display-flex(space-between, center, row);
   margin: 24px 0;
@@ -100,7 +149,6 @@ export default {
     font-size: 13px;
   }
 }
-
 table {
   width: 100%;
   border: 1px solid $grayBorder;
