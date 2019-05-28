@@ -8,8 +8,8 @@
       <colgroup>
         <col span="1" style="width: 3.5%;">
         <col span="1" style="width: 58;">
-        <col span="1" style="width: 10%;">
-        <col span="1" style="width: 15%; min-width: 110px;">
+        <col span="1" style="width: 15%;">
+        <col span="1" style="width: 15%; min-width: 8px;">
       </colgroup>
       <thead>
         <tr>
@@ -45,7 +45,7 @@
           <td class="product__sku">{{ product.sku }}</td>
           <td>
             <div
-              :class="[product.category === 'Uncategorized' ? 'uncategorized' : 'categorized']"
+              :class="[product.category === 'Fully taxed' ? 'uncategorized' : 'categorized']"
             >{{ product.category }}</div>
           </td>
         </tr>
@@ -129,6 +129,9 @@ export default {
     margin-right: 16px;
     padding: 0 8px;
   }
+  button:hover {
+    background: $colorTaxJarHover;
+  }
   .table__actions--context {
     @include display-flex(flex-start, center, row);
     .context__count {
@@ -138,7 +141,7 @@ export default {
       color: $colorFontLight;
     }
     .context__deselect:hover {
-      text-transform: underline;
+      text-decoration: underline;
       color: $colorFontDark;
       cursor: pointer;
     }
@@ -213,7 +216,7 @@ table {
       text-overflow: ellipsis;
     }
     .uncategorized {
-      width: 104px !important;
+      width: 84px !important;
       background: #eeeeee;
       color: $colorFontLight;
       padding: 4px 10px;
