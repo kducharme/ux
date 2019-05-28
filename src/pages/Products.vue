@@ -4,7 +4,7 @@
       <div class="header__top">
         <div class="header__top--left">
           <h1>Products</h1>
-          <p>TaxJar product taxability tool</p>
+          <p>Categorize your products</p>
         </div>
         <div class="header__top--right">
           <button>Request catagory</button>
@@ -51,13 +51,12 @@ export default {
 @import "../styles/mixins.scss";
 
 .products {
-  height: calc(100vh - 60px);
+  height: 100%;
   background: $grayBackground;
 
   .header {
-    padding: 48px 180px 32px;
+    padding: 40px 240px 32px;
     background: white;
-    // border-bottom: 1px solid $grayBorder;
     @include display-flex(flex-start, center, column);
     .header__top {
       width: 100%;
@@ -115,7 +114,7 @@ export default {
     @include display-flex(flex-start, center, row);
     border-bottom: 1px solid $grayBorder;
     background: white;
-    padding: 0 180px;
+    padding: 0 240px;
     button {
       color: $colorFontLight;
       margin-right: 16px;
@@ -128,7 +127,9 @@ export default {
     }
   }
   .content {
-    padding: 0 180px;
+    padding: 0 240px;
+    height: 100%;
+    min-height: calc(100vh - 320px);
     
   }
 }
