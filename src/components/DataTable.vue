@@ -56,7 +56,10 @@
       class="table__actions"
     >
       <button>Add to category</button>
-      <p>{{selectedProducts.length}} products selected</p>
+      <div class='table__actions--context'>
+        <p class='context__count'>{{selectedProducts.length}} products selected</p>
+        <p class='context__deselect' v-on:click="selectAll">(Deselect all)</p>
+      </div>
     </div>
   </div>
 </template>
@@ -82,6 +85,9 @@ export default {
         .then(products => {
           this.allProducts = products;
         });
+    },
+    selectAll: function() {
+      this.selectedProducts = [];
     }
   },
   computed: {
@@ -123,6 +129,21 @@ export default {
     margin-right: 16px;
     padding: 0 8px;
   }
+  .table__actions--context {
+    @include display-flex(flex-start, center, row);
+    .context__count {
+      margin-right: 6px;
+    }
+    .context__deselect {
+      color: $colorFontLight;
+    }
+    .context__deselect:hover {
+      text-transform: underline;
+      color: $colorFontDark;
+      cursor: pointer;
+    }
+  }
+
 }
 
 .showActions {
