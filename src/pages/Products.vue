@@ -19,12 +19,22 @@
       </div>
     </div>
     <div class="filter">
-      <button class='active'>All products</button>
-      <button>Taxable</button>
-      <button>Exemptions</button>
+      <div class="active">All products</div>
+      <div>
+        Taxable
+        <span>100</span>
+      </div>
+      <div>
+        Exempt
+        <span>0</span>
+      </div>
+      <div>
+        Reduced
+        <span>0</span>
+      </div>
     </div>
     <div class="content">
-      <DataTable />
+      <DataTable/>
     </div>
   </div>
 </template>
@@ -37,12 +47,11 @@ export default {
   components: { DataTable },
   data() {
     return {
-      activeTab: 'all',
-      announcement: `We've imported 100 products and categorized them as "fully taxed". Please update your product categories for more accurate calculations.`
-    }
+      activeTab: "all",
+      announcement: `We've imported 100 products and auto-categorized them as "fully taxed".  Please update your  categories for more accurate calculations.`
+    };
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 
@@ -94,7 +103,7 @@ export default {
       margin-top: 32px;
       .announcement {
         @include display-flex(flex-start, center, row);
-        background: #E6EEF4;
+        background: #e6eef4;
         height: 48px;
         border-radius: 3px;
         padding: 0 20px;
@@ -103,7 +112,7 @@ export default {
         padding-right: 12px;
       }
       p {
-        color: #0B5C98;;
+        color: #0b5c98;
         span {
           font-weight: $weightHeavy;
         }
@@ -115,22 +124,34 @@ export default {
     // border-bottom: 1px solid $grayBorder;
     background: white;
     padding: 0 240px;
-    button {
+    div {
+      font-size: 14px;
       color: $colorFontLight;
-      margin-right: 16px;
+      margin-right: 24px;
       padding-bottom: 16px;
+      span {
+        background: $grayBorder;
+        color: $colorFontLight;
+        padding: 2px 4px;
+        font-size: 12px;
+        font-weight: $weightMedium;
+        border-radius: 5px;
+        margin-left: 2px;
+      }
     }
     .active {
       color: $colorTaxJar;
       border-bottom: 3px solid $colorTaxJar;
       font-weight: $weightHeavy;
     }
+    div:hover {
+      cursor: pointer;
+    }
   }
   .content {
     padding: 0 240px;
     height: 100%;
     min-height: calc(100vh - 320px);
-    
   }
 }
 </style>

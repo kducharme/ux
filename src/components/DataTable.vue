@@ -27,18 +27,18 @@
       <tbody>
         <tr
           v-for="product in tableResults"
-          :key="product.index"
-          :class="[selectedProducts.includes(product.index) ? 'selectedRow' : '']"
+          :key="product.id"
+          :class="[selectedProducts.includes(product.id) ? 'selectedRow' : '']"
         >
           <td>
             <div class="product__select">
               <input
                 type="checkbox"
-                :value="product.index"
-                :id="product.index"
+                :value="product.id"
+                :id="product.id"
                 v-model="selectedProducts"
               >
-              <label :for="product.index"></label>
+              <label :for="product.id"></label>
             </div>
           </td>
           <td class="product__name">{{ product.name }}</td>
@@ -56,9 +56,9 @@
       class="table__actions"
     >
       <button>Add to category</button>
-      <div class='table__actions--context'>
-        <p class='context__count'>{{selectedProducts.length}} products selected</p>
-        <p class='context__deselect' v-on:click="selectAll">(Deselect all)</p>
+      <div class="table__actions--context">
+        <p class="context__count">{{selectedProducts.length}} products selected</p>
+        <p class="context__deselect" v-on:click="selectAll">(Deselect all)</p>
       </div>
     </div>
   </div>
@@ -95,7 +95,9 @@ export default {
     tableResults() {
       if (!this.search) return this.allProducts;
       return this.allProducts.filter(product => {
-        return product.name.toLowerCase().includes(this.search.toLowerCase());
+        if (product.name.toLowerCase().includes(this.search.toLowerCase())) {
+          return product;
+        }
       });
     }
   },
@@ -119,7 +121,7 @@ export default {
   position: -webkit-sticky;
   position: sticky;
   padding: 0 16px;
-  box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
   button {
     background: $colorTaxJar;
     height: 38px;
@@ -146,7 +148,6 @@ export default {
       cursor: pointer;
     }
   }
-
 }
 
 .showActions {
@@ -171,6 +172,11 @@ export default {
     width: 280px;
     padding: 0 12px;
     font-size: 13px;
+    border-radius: 3px;
+    border: 1px solid $grayBorder;
+  }
+  input:focus {
+    border: 1px solid $colorFontLight;
   }
 }
 table {
