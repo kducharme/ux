@@ -8,8 +8,8 @@
       <colgroup>
         <col span="1" style="width: 3.5%;">
         <col span="1" style="width: 58;">
-        <col span="1" style="width: 10%;">
-        <col span="1" style="width: 15%; min-width: 110px;">
+        <col span="1" style="width: 15%;">
+        <col span="1" style="width: 15%; min-width: 8px;">
       </colgroup>
       <thead>
         <tr>
@@ -27,25 +27,25 @@
       <tbody>
         <tr
           v-for="product in tableResults"
-          :key="product.index"
-          :class="[selectedProducts.includes(product.index) ? 'selectedRow' : '']"
+          :key="product.id"
+          :class="[selectedProducts.includes(product.id) ? 'selectedRow' : '']"
         >
           <td>
             <div class="product__select">
               <input
                 type="checkbox"
-                :value="product.index"
-                :id="product.index"
+                :value="product.id"
+                :id="product.id"
                 v-model="selectedProducts"
               >
-              <label :for="product.index"></label>
+              <label :for="product.id"></label>
             </div>
           </td>
           <td class="product__name">{{ product.name }}</td>
           <td class="product__sku">{{ product.sku }}</td>
           <td>
             <div
-              :class="[product.category === 'Uncategorized' ? 'uncategorized' : 'categorized']"
+              :class="[product.category === 'Fully taxed' ? 'uncategorized' : 'categorized']"
             >{{ product.category }}</div>
           </td>
         </tr>
@@ -56,7 +56,10 @@
       class="table__actions"
     >
       <button>Add to category</button>
-      <p>{{selectedProducts.length}} products selected</p>
+      <div class="table__actions--context">
+        <p class="context__count">{{selectedProducts.length}} products selected</p>
+        <p class="context__deselect" v-on:click="selectAll">(Deselect all)</p>
+      </div>
     </div>
   </div>
 </template>
@@ -82,6 +85,9 @@ export default {
         .then(products => {
           this.allProducts = products;
         });
+    },
+    selectAll: function() {
+      this.selectedProducts = [];
     }
   },
   computed: {
@@ -89,7 +95,9 @@ export default {
     tableResults() {
       if (!this.search) return this.allProducts;
       return this.allProducts.filter(product => {
-        return product.name.toLowerCase().includes(this.search.toLowerCase());
+        if (product.name.toLowerCase().includes(this.search.toLowerCase())) {
+          return product;
+        }
       });
     }
   },
@@ -113,7 +121,7 @@ export default {
   position: -webkit-sticky;
   position: sticky;
   padding: 0 16px;
-  box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
   button {
     background: $colorTaxJar;
     height: 38px;
@@ -122,6 +130,23 @@ export default {
     font-weight: $weightMedium;
     margin-right: 16px;
     padding: 0 8px;
+  }
+  button:hover {
+    background: $colorTaxJarHover;
+  }
+  .table__actions--context {
+    @include display-flex(flex-start, center, row);
+    .context__count {
+      margin-right: 6px;
+    }
+    .context__deselect {
+      color: $colorFontLight;
+    }
+    .context__deselect:hover {
+      text-decoration: underline;
+      color: $colorFontDark;
+      cursor: pointer;
+    }
   }
 }
 
@@ -147,6 +172,11 @@ export default {
     width: 280px;
     padding: 0 12px;
     font-size: 13px;
+    border-radius: 3px;
+    border: 1px solid $grayBorder;
+  }
+  input:focus {
+    border: 1px solid $colorFontLight;
   }
 }
 table {
@@ -192,7 +222,7 @@ table {
       text-overflow: ellipsis;
     }
     .uncategorized {
-      width: 104px !important;
+      width: 84px !important;
       background: #eeeeee;
       color: $colorFontLight;
       padding: 4px 10px;

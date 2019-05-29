@@ -8,23 +8,33 @@
         </div>
         <div class="header__top--right">
           <button>Request catagory</button>
-          <button>Category settings</button>
+          <button>Settings</button>
         </div>
       </div>
       <div class="header__bottom">
         <div class="announcement">
-          <img alt="warning" src="../assets/warn.svg">
+          <img alt="warning" src="../assets/update.svg">
           <p>{{ announcement }}</p>
         </div>
       </div>
     </div>
     <div class="filter">
-      <button class='active'>All products</button>
-      <button>Categorized</button>
-      <button>Uncategorized</button>
+      <div class="active">All products</div>
+      <div>
+        Taxable
+        <span>100</span>
+      </div>
+      <div>
+        Exempt
+        <span>0</span>
+      </div>
+      <div>
+        Reduced
+        <span>0</span>
+      </div>
     </div>
     <div class="content">
-      <DataTable />
+      <DataTable/>
     </div>
   </div>
 </template>
@@ -37,12 +47,11 @@ export default {
   components: { DataTable },
   data() {
     return {
-      activeTab: 'all',
-      announcement: 'You have 43 uncategorized products. Please categorize your products now to ensure that the correct tax code is applied.'
-    }
+      activeTab: "all",
+      announcement: `We've imported 100 products and auto-categorized them as "fully taxed".  Please update your  categories for more accurate calculations.`
+    };
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 
@@ -80,7 +89,7 @@ export default {
           height: 40px;
           padding: 0 16px;
           border-radius: 3px;
-          margin-left: 16px;
+          margin-left: 12px;
           color: $colorFontMedium;
           font-weight: $weightMedium;
         }
@@ -94,7 +103,7 @@ export default {
       margin-top: 32px;
       .announcement {
         @include display-flex(flex-start, center, row);
-        background: $colorFailureLight;
+        background: #e6eef4;
         height: 48px;
         border-radius: 3px;
         padding: 0 20px;
@@ -103,7 +112,7 @@ export default {
         padding-right: 12px;
       }
       p {
-        color: $colorFailure;
+        color: #0b5c98;
         span {
           font-weight: $weightHeavy;
         }
@@ -112,25 +121,37 @@ export default {
   }
   .filter {
     @include display-flex(flex-start, center, row);
-    border-bottom: 1px solid $grayBorder;
+    // border-bottom: 1px solid $grayBorder;
     background: white;
     padding: 0 240px;
-    button {
+    div {
+      font-size: 14px;
       color: $colorFontLight;
-      margin-right: 16px;
+      margin-right: 24px;
       padding-bottom: 16px;
+      span {
+        background: $grayBorder;
+        color: $colorFontLight;
+        padding: 2px 4px;
+        font-size: 12px;
+        font-weight: $weightMedium;
+        border-radius: 5px;
+        margin-left: 2px;
+      }
     }
     .active {
       color: $colorTaxJar;
       border-bottom: 3px solid $colorTaxJar;
       font-weight: $weightHeavy;
     }
+    div:hover {
+      cursor: pointer;
+    }
   }
   .content {
     padding: 0 240px;
     height: 100%;
     min-height: calc(100vh - 320px);
-    
   }
 }
 </style>
