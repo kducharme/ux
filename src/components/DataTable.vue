@@ -168,7 +168,7 @@ export default {
     color: $colorFontLight;
   }
   input {
-    height: 32px;
+    height: 36px;
     width: 280px;
     padding: 0 12px;
     font-size: 13px;

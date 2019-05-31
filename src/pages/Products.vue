@@ -21,17 +21,17 @@
     <div class="filter">
       <div class="active">All products</div>
       <div>
-        Taxable
-        <span>100</span>
+        Auto-categorized
+        <span>220</span>
       </div>
       <div>
-        Exempt
+        Need review
         <span>0</span>
       </div>
-      <div>
+      <!-- <div>
         Reduced
         <span>0</span>
-      </div>
+      </div> -->
     </div>
     <div class="content">
       <DataTable/>
@@ -48,7 +48,8 @@ export default {
   data() {
     return {
       activeTab: "all",
-      announcement: `We've imported 100 products and auto-categorized them as "fully taxed".  Please update your  categories for more accurate calculations.`
+      announcement: `We've imported 220 products and auto-categorized them as "fully taxed".  Please update your  categories for more accurate calculations.`,
+      showModal: false
     };
   },
   methods: {}
