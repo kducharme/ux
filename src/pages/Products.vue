@@ -7,8 +7,6 @@
           <p>Categorize your products</p>
         </div>
         <div class="header__top--right">
-          <button>Request catagory</button>
-          <button>Settings</button>
         </div>
       </div>
       <div class="header__bottom">
