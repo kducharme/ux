@@ -1,63 +1,72 @@
 <template>
   <div>
+    <div class="back">
+      <img src="../assets/chevron__back.svg" class="icon" />
+      <p>Back to all</p>
+    </div>
     <div class="table__header">
-      <p>Showing {{tableResults.length}} of {{allProducts.length}} products</p>
-      <input type="text" placeholder="Search products" v-model="search">
+      <div class="table__header--left">
+        <div class="icon">
+          <img src="../assets/digital.svg" class="icon" />
+        </div>
+        <div class="title">
+          <h2>{{ activeCategory }} Tax Codes</h2>
+          <p>Showing {{tableResults.length}} of {{allCodes.length}} codes</p>
+        </div>
+      </div>
+      <div class="table__header--right">
+        <input type="text" placeholder="Search tax codes" v-model="search" />
+      </div>
     </div>
     <table>
       <colgroup>
-        <col span="1" style="width: 3.5%;">
-        <col span="1" style="width: 58;">
-        <col span="1" style="width: 15%;">
-        <col span="1" style="width: 15%; min-width: 8px;">
+        <col span="1" style="width: 3.5%;" />
+        <col span="1" style="width: 58;" />
+        <col span="1" style="width: 15%;" />
+        <col span="1" style="width: 15%; min-width: 8px;" />
       </colgroup>
       <thead>
         <tr>
           <th>
-            <div class="product__select">
-              <input type="checkbox" id="selectAll">
+            <div class="code__select">
+              <input type="checkbox" id="selectAll" />
               <label for="selectAll"></label>
             </div>
           </th>
-          <th class="product__name">Product name</th>
-          <th class="product__sku">SKU</th>
-          <th class="product__category">Cateogry</th>
+          <th class="code__name">code name</th>
+          <th class="code__sku">SKU</th>
+          <th class="code__category"></th>
         </tr>
       </thead>
       <tbody>
         <tr
-          v-for="product in tableResults"
-          :key="product.id"
-          :class="[selectedProducts.includes(product.id) ? 'selectedRow' : '']"
+          v-for="code in tableResults"
+          :key="code.Code"
+          :class="[selectedCodes.includes(code.Code) ? 'selectedRow' : '']"
         >
           <td>
-            <div class="product__select">
-              <input
-                type="checkbox"
-                :value="product.id"
-                :id="product.id"
-                v-model="selectedProducts"
-              >
-              <label :for="product.id"></label>
+            <div class="code__select">
+              <input type="checkbox" :value="code.Code" :Code="code.Code" v-model="selectedCodes" />
+              <label :for="code.Code"></label>
             </div>
           </td>
-          <td class="product__name">{{ product.name }}</td>
-          <td class="product__sku">{{ product.sku }}</td>
+          <td class="code__name">{{ code.Name }}</td>
+          <td class="code__sku">{{ code.Code }}</td>
           <td>
             <div
-              :class="[product.category === 'Fully taxed' ? 'uncategorized' : 'categorized']"
-            >{{ product.category }}</div>
+              :class="[code.category === 'Fully taxed' ? 'uncategorized' : 'categorized']"
+            >{{ code.category }}</div>
           </td>
         </tr>
       </tbody>
     </table>
     <div
-      :class="[selectedProducts.length === 0 ? 'hideActions' : 'showActions']"
+      :class="[selectedCodes.length === 0 ? 'hideActions' : 'showActions']"
       class="table__actions"
     >
       <button>Add to category</button>
       <div class="table__actions--context">
-        <p class="context__count">{{selectedProducts.length}} products selected</p>
+        <p class="context__count">{{selectedCodes.length}} codes selected</p>
         <p class="context__deselect" v-on:click="selectAll">(Deselect all)</p>
       </div>
     </div>
@@ -72,37 +81,38 @@ export default {
   components: {},
   data() {
     return {
-      allProducts: "",
-      selectedProducts: [],
-      search: ""
+      allCodes: "",
+      selectedCodes: [],
+      search: "",
+      activeCategory: "Digital & Software"
     };
   },
   methods: {
-    ...mapActions(["getProducts"]),
-    getProductData: function() {
-      fetch(`http://localhost:3000/products`)
+    ...mapActions(["getCodes"]),
+    getCodeData: function() {
+      fetch(`http://localhost:3000/codes`)
         .then(r => r.json())
-        .then(products => {
-          this.allProducts = products;
+        .then(codes => {
+          this.allCodes = codes;
         });
     },
     selectAll: function() {
-      this.selectedProducts = [];
+      this.selectedCodes = [];
     }
   },
   computed: {
-    ...mapState(["products"]),
+    ...mapState(["codes"]),
     tableResults() {
-      if (!this.search) return this.allProducts;
-      return this.allProducts.filter(product => {
-        if (product.name.toLowerCase().includes(this.search.toLowerCase())) {
-          return product;
+      if (!this.search) return this.allCodes;
+      return this.allCodes.filter(allCodes => {
+        if (code.name.toLowerCase().includes(this.search.toLowerCase())) {
+          return code;
         }
       });
     }
   },
   beforeMount() {
-    this.getProductData();
+    this.getCodeData();
   }
 };
 </script>
@@ -110,6 +120,15 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/variables.scss";
 @import "../styles/mixins.scss";
+
+.back {
+  @include display-flex(flex-start, center, row);
+  color: #939396;
+  margin-bottom: 16px;
+  img {
+    margin-right: 6px;
+  }
+}
 
 .table__actions {
   @include display-flex(flex-start, center, row);
@@ -162,21 +181,48 @@ export default {
 }
 
 .table__header {
-  @include display-flex(space-between, center, row);
-  margin: 24px 0;
+  @include display-flex(space-between, flex-start, row);
+  margin: 8px 0 24px 0;
   p {
     color: $colorFontLight;
   }
-  input {
-    height: 36px;
-    width: 280px;
-    padding: 0 12px;
-    font-size: 13px;
-    border-radius: 3px;
-    border: 1px solid $grayBorder;
+  .table__header--left {
+    @include display-flex(flex-start, center, row);
+    .icon {
+      @include display-flex(center, center, row);
+      border: 1px solid $grayBorder;
+      border-radius: 3px;
+      height: 64px;
+      width: 64px;
+      img {
+        width: 46px;
+        border: none;
+      }
+    }
+    .title {
+      margin-left: 16px;
+      h2 {
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+      p {
+        font-size: 14px;
+        color: $colorFontLight;
+      }
+    }
   }
-  input:focus {
-    border: 1px solid $colorFontLight;
+  .table__header--right {
+    input {
+      height: 36px;
+      width: 280px;
+      padding: 0 12px;
+      font-size: 13px;
+      border-radius: 3px;
+      border: 1px solid $grayBorder;
+    }
+    input:focus {
+      border: 1px solid $colorFontLight;
+    }
   }
 }
 table {
@@ -209,14 +255,14 @@ table {
       height: 44px;
     }
     td {
-      color: $colorFontDark;
+      color: $colorFontMedium;
       border-bottom: 1px solid $grayBorder;
       padding: 0 16px;
     }
     .selectedRow {
       background: $colorBlueLight;
     }
-    .product__name {
+    .code__name {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

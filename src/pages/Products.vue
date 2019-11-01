@@ -10,21 +10,25 @@
       </div>
     </div>
     <div class="content">
-      <Library />
+      <div class="content__left">
+        <Library />
+      </div>
+      <div class="content__right">
+        Filters will go here
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import DataTable from "../components/DataTable.vue";
+import Library from "../components/Library.vue";
 
 export default {
   name: "products",
-  components: { DataTable },
+  components: { Library },
   data() {
     return {
       activeTab: "all",
-      announcement: `We've imported 220 products and auto-categorized them as "fully taxed".  Please update your  categories for more accurate calculations.`,
       showModal: false
     };
   },
@@ -57,12 +61,11 @@ export default {
     width: 100%;
     div {
       font-size: 14px;
-      color: $colorFontLight;
+      color: #88888B;
       margin-right: 24px;
       padding-bottom: 16px;
       span {
         background: $grayBorder;
-        color: $colorFontLight;
         padding: 2px 4px;
         font-size: 12px;
         font-weight: $weightMedium;
@@ -80,9 +83,16 @@ export default {
     }
   }
   .content {
-    padding: 0 240px;
-    height: 100%;
+    @include display-flex(flex-start, flex-start, row);
+    padding: 16px 100px 0;
     min-height: calc(100vh - 320px);
+    .content__left {
+      width: 70%;
+      margin-right: 56px;
+    }
+    .content__right {
+      width: 30%;
+    }
   }
 }
 </style>
