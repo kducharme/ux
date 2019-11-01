@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <img alt="TaxJar logo" src="./assets/taxjar.svg" class="logo">
+      <img alt="TaxJar logo" src="./assets/plus.svg" class="logo">
       <div>
         <router-link to="/dashboard" exact>Dashboard</router-link>
         <router-link to="/transactions" exact>Transactions</router-link>
@@ -34,7 +34,7 @@ export default {
 @import "./styles/variables.scss";
 
 nav {
-  height: 60px;
+  height: 68px;
   border-bottom: 1px solid $grayBorder;
   @include display-flex(space-between, center, row);
   padding: 0 100px;
