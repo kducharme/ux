@@ -1,6 +1,37 @@
 <template>
   <div v-bind:class="[details ? 'structure' : 'hide']" v-on:click="hideDetails">
-    <div class="details">{{ code.name }}</div>
+    <div class="details">
+      <div class="details__column--left">
+        <div class="icon">
+          <img src="../assets/digital.svg" class="icon" />
+        </div>
+      </div>
+      <div class="details__column--right">
+        <div class="title">
+          <p class="title__name">{{code.name}}</p>
+          <p class="title__category">{{code.category}}</p>
+          <p class="title__description">{{ codeDescription }}</p>
+        </div>
+        <div class="section">
+          <div class="section__name">Tax code</div>
+          <div class="section__details">{{code.code}}</div>
+        </div>
+        <div class="section">
+          <div class="section__name">Includes products like</div>
+          <div class="example" v-for="item in includes" :key="item.code">
+            <img src="../assets/includes.svg" class="icon" />
+            <p class="listItem">{{item}}</p>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section__name">Excludes products like</div>
+          <div class="example" v-for="item in excludes" :key="item.code">
+            <img src="../assets/excludes.svg" class="icon" />
+            <p class="listItem">{{item}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -11,7 +42,17 @@ export default {
   name: "Details",
   data() {
     return {
-      showDetails: false
+      showDetails: false,
+      codeDescription:
+        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      includes: [
+        "Software as a Service products",
+        "Software licenses",
+        "Software subscriptions",
+        "Membership fees",
+        "One-time purchases"
+      ],
+      excludes: ["Physical goods", "PDF downloads", "Multi-media products"]
     };
   },
   props: {
@@ -49,8 +90,66 @@ export default {
     top: 0;
     right: 0;
     height: 100vh;
-    width: 400px;
+    min-width: 320px;
+    width: 45%;
     background: white;
+    padding: 32px;
+    @include display-flex(flex-start, flex-start, row);
+    .details__column--left {
+      .icon {
+        @include display-flex(center, center, row);
+        border: 1px solid $grayBorder;
+        border-radius: 3px;
+        height: 160px;
+        width: 160px;
+        img {
+          width: 80%;
+          border: none;
+        }
+      }
+    }
+    .details__column--right {
+      margin-left: 24px;
+      @include display-flex(flex-start, flex-start, column);
+      line-height: 1.4;
+      .title {
+        @include display-flex(flex-start, flex-start, column);
+        .title__name {
+          font-size: 18px;
+          font-weight: $weightHeavy;
+          margin-bottom: 16px;
+        }
+        .title__category {
+          background-color: #f0f0f0;
+          padding: 4px 6px;
+          color: #88888b;
+          border-radius: 5px;
+          margin-bottom: 16px;
+        }
+      }
+      .section {
+        @include display-flex(flex-start, flex-start, column);
+        margin-top: 16px;
+        .section__name {
+          font-weight: $weightHeavy;
+          text-transform: uppercase;
+          font-size: 13px;
+          color: #a2a2a2;
+          margin: 16px 0 16px 0;
+        }
+        .section__details {
+          color: $colorFontDark;
+          font-size: 14px;
+        }
+        .example {
+          @include display-flex(flex-start, center, row);
+          margin-bottom: 12px;
+          img {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
   }
 }
 
