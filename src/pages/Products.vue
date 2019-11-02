@@ -1,5 +1,10 @@
 <template>
   <div class="products">
+    <Details 
+      :details="this.detailsActive"
+      :code="this.activeCode"
+      @hideDetails="hideDetails"
+    />
     <div class="header">
       <div class="header__top">
         <h1>Product exemptions</h1>
@@ -11,10 +16,13 @@
     </div>
     <div class="content">
       <div class="content__left">
-        <Library />
+        <Library
+          @showDetails="showDetails" 
+          @activeCode="codeDetails"
+        />
       </div>
       <div class="content__right">
-        Filters will go here
+        <Filters />
       </div>
     </div>
   </div>
@@ -22,17 +30,30 @@
 
 <script>
 import Library from "../components/Library.vue";
+import Filters from "../components/Filters.vue";
+import Details from "../components/Details.vue";
 
 export default {
   name: "products",
-  components: { Library },
+  components: { Library, Filters, Details },
   data() {
     return {
       activeTab: "all",
-      showModal: false
+      detailsActive: false,
+      activeCode: ""
     };
   },
-  methods: {}
+  methods: {
+    showDetails: function(value) {
+      this.detailsActive = value;
+    },
+    hideDetails: function(value) {
+      this.detailsActive = value;
+    },
+    codeDetails: function(value) {
+      this.activeCode = value;
+    }
+  }
 };
 </script>
 
@@ -61,7 +82,7 @@ export default {
     width: 100%;
     div {
       font-size: 14px;
-      color: #88888B;
+      color: #88888b;
       margin-right: 24px;
       padding-bottom: 16px;
       span {
@@ -87,11 +108,11 @@ export default {
     padding: 16px 100px 0;
     min-height: calc(100vh - 320px);
     .content__left {
-      width: 70%;
+      width: 75%;
       margin-right: 56px;
     }
     .content__right {
-      width: 30%;
+      width: 25%;
     }
   }
 }
