@@ -38,7 +38,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="code in sortedCodes"
+          v-for="code in tableResults"
           :key="code.code"
           :class="[selectedCodes.includes(code.code) ? 'selectedRow' : '']"
         >
@@ -78,32 +78,32 @@ export default {
   },
   methods: {
     sortCodes: function() {
-      // TODO: make the codes sorted by grouo
+     // TODO: make the codes sorted by grouo
     },
     selectAll: function() {
       this.selectedCodes = [];
     },
     showDetails: function(code) {
-      this.$emit("showDetails", true);
-      this.$emit("activeCode", code);
+      this.$emit("showDetails", true)
+      this.$emit("activeCode", code)
+    },
+    sortCodes() {
+        console.log('hey')
+        return this.allCodes.sort((a, b) => a.name.localeCompare(b.name))
     }
   },
   computed: {
     ...mapState(["codes"]),
     tableResults() {
-      // return this.allCodes.filter(allCodes => {
-      //   if (allCodes.name.toLowerCase().includes(this.search.toLowerCase())) {
-      //     return allCodes;
-      //   }
-      // });
+      this.sortCodes()
+      if (!this.search) return this.allCodes;
       return this.allCodes.filter(allCodes => {
         if (allCodes.name.toLowerCase().includes(this.search.toLowerCase())) {
-          this.sortedCodes = this.allCodes.sort((a, b) => a.name.localeCompare(b.name))
-          return this.sortedCodes;
+          return allCodes;
         }
       });
     }
-  }
+  },
 };
 </script>
 
