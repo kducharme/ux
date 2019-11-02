@@ -48,17 +48,11 @@
               <label :for="code.code"></label>
             </div>
           </td>
-          <td
-            class="code__name"
-            v-on:click="showDetails(code)"
-          >
-              {{ code.name }}
-          </td>
+          <td class="code__name" v-on:click="showDetails(code)">{{ code.name }}</td>
           <td class="code__sku">{{ code.code }}</td>
         </tr>
       </tbody>
     </table>
-
   </div>
 </template>
 
@@ -66,25 +60,24 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "Library",
+  name: "Table",
   components: {},
   data() {
     return {
-      allCodes: "",
       activeCode: {},
       selectedCodes: [],
       search: "",
       activeCategory: "Digital & Software"
     };
   },
+  props: {
+    allCodes: {
+      type: Array
+    }
+  },
   methods: {
-    ...mapActions(["getCodes"]),
-    getCodeData: function() {
-      fetch(`http://localhost:3000/codes`)
-        .then(r => r.json())
-        .then(codes => {
-          this.allCodes = codes;
-        });
+    sortCodes: function() {
+     // TODO: make the codes sorted by grouo
     },
     selectAll: function() {
       this.selectedCodes = [];
@@ -105,9 +98,6 @@ export default {
       });
     }
   },
-  beforeMount() {
-    this.getCodeData();
-  }
 };
 </script>
 

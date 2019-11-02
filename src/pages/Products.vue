@@ -1,10 +1,6 @@
 <template>
   <div class="products">
-    <Details 
-      :details="this.detailsActive"
-      :code="this.activeCode"
-      @hideDetails="hideDetails"
-    />
+    <Details :details="this.detailsActive" :code="this.activeCode" @hideDetails="hideDetails" />
     <div class="header">
       <div class="header__top">
         <h1>Product exemptions</h1>
@@ -16,34 +12,44 @@
     </div>
     <div class="content">
       <div class="content__left">
-        <Library
-          @showDetails="showDetails" 
+        <Table
+          @showDetails="showDetails"
           @activeCode="codeDetails"
+          :allCodes="this.allCodes"
         />
       </div>
       <div class="content__right">
-        <Filters />
+        <Filters :allCodes="this.allCodes" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Library from "../components/Library.vue";
+import { mapState, mapActions } from "vuex";
+import Table from "../components/Table.vue";
 import Filters from "../components/Filters.vue";
 import Details from "../components/Details.vue";
 
 export default {
   name: "products",
-  components: { Library, Filters, Details },
+  components: { Table, Filters, Details },
   data() {
     return {
+      allCodes: [],
       activeTab: "all",
       detailsActive: false,
-      activeCode: ""
+      activeCode: {}
     };
   },
   methods: {
+    getCodeData: function() {
+      fetch(`http://localhost:3000/codes`)
+        .then(r => r.json())
+        .then(codes => {
+          this.allCodes = codes;
+        });
+    },
     showDetails: function(value) {
       this.detailsActive = value;
     },
@@ -53,6 +59,9 @@ export default {
     codeDetails: function(value) {
       this.activeCode = value;
     }
+  },
+  beforeMount() {
+    this.getCodeData();
   }
 };
 </script>
