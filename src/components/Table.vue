@@ -20,10 +20,9 @@
     </div>
     <table>
       <colgroup>
-        <col span="1" style="width: 3.5%;" />
-        <col span="1" style="width: 58;" />
-        <col span="1" style="width: 15%;" />
-        <col span="1" style="width: 15%; min-width: 8px;" />
+        <col span="1" style="width: 5%;" />
+        <col span="1" style="width: 70;" />
+        <col span="1" style="width: 25%;" />
       </colgroup>
       <thead>
         <tr>
@@ -33,43 +32,27 @@
               <label for="selectAll"></label>
             </div>
           </th>
-          <th class="code__name">code name</th>
-          <th class="code__sku">SKU</th>
-          <th class="code__category"></th>
+          <th class="code__name">Name</th>
+          <th class="code__sku">Tax Code</th>
         </tr>
       </thead>
       <tbody>
         <tr
           v-for="code in tableResults"
-          :key="code.Code"
-          :class="[selectedCodes.includes(code.Code) ? 'selectedRow' : '']"
+          :key="code.code"
+          :class="[selectedCodes.includes(code.code) ? 'selectedRow' : '']"
         >
           <td>
             <div class="code__select">
-              <input type="checkbox" :value="code.Code" :Code="code.Code" v-model="selectedCodes" />
-              <label :for="code.Code"></label>
+              <input type="checkbox" :value="code.code" :code="code.code" v-model="selectedCodes" />
+              <label :for="code.code"></label>
             </div>
           </td>
-          <td class="code__name">{{ code.Name }}</td>
-          <td class="code__sku">{{ code.Code }}</td>
-          <td>
-            <div
-              :class="[code.category === 'Fully taxed' ? 'uncategorized' : 'categorized']"
-            >{{ code.category }}</div>
-          </td>
+          <td class="code__name" v-on:click="showDetails(code)">{{ code.name }}</td>
+          <td class="code__sku">{{ code.code }}</td>
         </tr>
       </tbody>
     </table>
-    <div
-      :class="[selectedCodes.length === 0 ? 'hideActions' : 'showActions']"
-      class="table__actions"
-    >
-      <button>Add to category</button>
-      <div class="table__actions--context">
-        <p class="context__count">{{selectedCodes.length}} codes selected</p>
-        <p class="context__deselect" v-on:click="selectAll">(Deselect all)</p>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -77,43 +60,50 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "DataTable",
+  name: "Table",
   components: {},
   data() {
     return {
-      allCodes: "",
+      activeCode: {},
       selectedCodes: [],
+      sortedCodes: [],
       search: "",
       activeCategory: "Digital & Software"
     };
   },
+  props: {
+    allCodes: {
+      type: Array
+    }
+  },
   methods: {
-    ...mapActions(["getCodes"]),
-    getCodeData: function() {
-      fetch(`http://localhost:3000/codes`)
-        .then(r => r.json())
-        .then(codes => {
-          this.allCodes = codes;
-        });
+    sortCodes: function() {
+     // TODO: make the codes sorted by grouo
     },
     selectAll: function() {
       this.selectedCodes = [];
+    },
+    showDetails: function(code) {
+      this.$emit("showDetails", true)
+      this.$emit("activeCode", code)
+    },
+    sortCodes() {
+        console.log('hey')
+        return this.allCodes.sort((a, b) => a.name.localeCompare(b.name))
     }
   },
   computed: {
     ...mapState(["codes"]),
     tableResults() {
+      this.sortCodes()
       if (!this.search) return this.allCodes;
       return this.allCodes.filter(allCodes => {
-        if (code.name.toLowerCase().includes(this.search.toLowerCase())) {
-          return code;
+        if (allCodes.name.toLowerCase().includes(this.search.toLowerCase())) {
+          return allCodes;
         }
       });
     }
   },
-  beforeMount() {
-    this.getCodeData();
-  }
 };
 </script>
 
@@ -213,7 +203,7 @@ export default {
   }
   .table__header--right {
     input {
-      height: 36px;
+      height: 40px;
       width: 280px;
       padding: 0 12px;
       font-size: 13px;
@@ -266,6 +256,11 @@ table {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      color: $colorBlueDark;
+    }
+    .code__name:hover {
+      cursor: pointer;
+      text-decoration: underline;
     }
     .uncategorized {
       width: 84px !important;
