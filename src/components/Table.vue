@@ -84,9 +84,7 @@ export default {
         return this.allCodes;
       }
       return this.allCodes.filter(code => {
-        if (
-          code.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-        ) {
+        if (code.name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
           return code;
         }
       });
@@ -219,15 +217,16 @@ table {
   border-radius: 3px;
   font-size: 14px;
   font-weight: $weightLight;
+  // height: calc(100vh - 68px - 111px - 32px);
   thead {
     text-align: left;
-    // background-color: $grayBackground;
     border: none !important;
     border-bottom: 1px solid $grayBorder;
     color: $colorFontLight;
     font-weight: $weightHeavy;
     tr {
       height: 48px;
+      max-height: 48px;
       border: none;
     }
     th {

@@ -23,22 +23,23 @@
             <img src="../assets/chevron__back.svg" class="icon" />
             <p>Back to all</p>
           </div>
-          <div class="header__icon">
+          <!-- <div class="header__icon">
             <img src="../assets/digital.svg" class="icon" />
-          </div>
-          <div class="header__title">
-            <h2>{{ activeCategory }} </h2>
-            <p>Showing {{ this.results }} of {{allCodes.length}} tax codes</p>
-          </div>
+          </div>-->
         </div>
 
         <!-- Table filters -->
-        <div class="filters">
-          <div class="filters__search">
-            <p class="filter__title">Search tax codes</p>
-            <input type="text" placeholder="Search by name" v-model="search" />
+        <div class="sticky">
+          <div class="title">
+            <h2>{{ activeCategory }}</h2>
+            <p>Showing {{ this.results }} of {{allCodes.length}} tax codes</p>
           </div>
-          <Filters :allCodes="this.allCodes" />
+          <div class="filters">
+            <div class="filters__search">
+              <input type="text" placeholder="Filter codes by name..." v-model="search" />
+            </div>
+            <Filters :allCodes="this.allCodes" />
+          </div>
         </div>
       </div>
 
@@ -162,11 +163,15 @@ export default {
 
   .content {
     @include display-flex(flex-start, flex-start, row);
-    padding: 16px 100px 0;
+    padding: 24px 100px 0;
     min-height: calc(100vh - 320px);
     .column__left {
-      margin-right: 80px;
+      margin-right: 72px;
       margin-top: 8px;
+      width: 20%;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 24px;
       .header {
         .header__back {
           @include display-flex(flex-start, center, row);
@@ -180,39 +185,44 @@ export default {
           @include display-flex(center, center, row);
           border: 1px solid $grayBorder;
           border-radius: 3px;
-          height: 220px;
-          width: 220px;
+          height: 200px;
+          width: 200px;
           margin-bottom: 24px;
           img {
             width: 50%;
             border: none;
           }
         }
-        .header__title {
-          margin-bottom: 32px;
+      }
+      .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0px;
+        .title {
+          margin-bottom: 24px;
           h2 {
             font-size: 22px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
           }
           p {
             font-size: 14px;
             color: $colorFontLight;
           }
         }
-      }
-      .filters {
-        .filters__search {
-          margin-bottom: 16px;
-          input {
-            height: 40px;
-            width: 220px;
-            padding: 0 12px;
-            font-size: 13px;
-            border-radius: 3px;
-            border: 1px solid $grayBorder;
-          }
-          input:focus {
-            border: 1px solid $colorFontLight;
+        .filters {
+          .filters__search {
+            margin-bottom: 32px;
+            input {
+              height: 40px;
+              width: 100%;
+              padding: 0 12px;
+              font-size: 13px;
+              border-radius: 3px;
+              border: 1px solid $grayBorder;
+            }
+            input:focus {
+              border: 1px solid $colorFontLight;
+            }
           }
         }
       }
