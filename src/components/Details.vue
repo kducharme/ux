@@ -6,7 +6,7 @@
           <img src="../assets/digital.svg" class="icon" />
         </div>
         <button class="btn btn__primary">Copy code</button>
-        <button class="btn btn__secondary">Favorite</button>
+        <button class="btn btn__secondary">Save for later</button>
       </div>
       <div class="details__column--right">
         <div class="title">

@@ -1,25 +1,56 @@
 <template>
   <div class="products">
     <Details :details="this.detailsActive" :code="this.activeCode" @hideDetails="hideDetails" />
-    <div class="header">
-      <div class="header__top">
+
+    <!-- Page subnavigation -->
+    <div class="subNav">
+      <div class="subNav__top">
         <h1>Product exemptions</h1>
       </div>
-      <div class="header__bottom">
+      <div class="subNav__bottom">
         <div>Map products</div>
         <div class="active">Tax code library</div>
       </div>
     </div>
+
+    <!-- Main content -->
     <div class="content">
-      <div class="content__left">
+      <!-- Left column -->
+      <div class="column__left">
+        <!-- Header section -->
+        <div class="header">
+          <div class="header__back">
+            <img src="../assets/chevron__back.svg" class="icon" />
+            <p>Back to all</p>
+          </div>
+          <div class="header__icon">
+            <img src="../assets/digital.svg" class="icon" />
+          </div>
+          <div class="header__title">
+            <h2>{{ activeCategory }} </h2>
+            <p>Showing {{ this.results }} of {{allCodes.length}} tax codes</p>
+          </div>
+        </div>
+
+        <!-- Table filters -->
+        <div class="filters">
+          <div class="filters__search">
+            <p class="filter__title">Search tax codes</p>
+            <input type="text" placeholder="Search by name" v-model="search" />
+          </div>
+          <Filters :allCodes="this.allCodes" />
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="column__right">
         <Table
           @showDetails="showDetails"
           @activeCode="codeDetails"
+          @tableResults="tableResults"
           :allCodes="this.allCodes"
+          :searchTerm="this.search"
         />
-      </div>
-      <div class="content__right">
-        <Filters :allCodes="this.allCodes" />
       </div>
     </div>
   </div>
@@ -39,7 +70,10 @@ export default {
       allCodes: [],
       activeTab: "all",
       detailsActive: false,
-      activeCode: {}
+      activeCode: {},
+      activeCategory: "Digital & Software",
+      search: "",
+      results: 0
     };
   },
   methods: {
@@ -53,6 +87,10 @@ export default {
     showDetails: function(value) {
       this.detailsActive = value;
     },
+    tableResults: function(value) {
+      this.results = value;
+      // console.log(this.results)
+    },
     hideDetails: function(value) {
       this.detailsActive = value;
     },
@@ -62,6 +100,9 @@ export default {
   },
   beforeMount() {
     this.getCodeData();
+  },
+  updated() {
+    this.results = document.getElementById("tableBody").childElementCount;
   }
 };
 </script>
@@ -70,14 +111,20 @@ export default {
 @import "../styles/variables.scss";
 @import "../styles/mixins.scss";
 
+.filter__title {
+  font-weight: $weightHeavy;
+  color: #88888b;
+  margin-bottom: 16px;
+}
+
 .products {
   height: 100vh;
-  .header {
+  .subNav {
     padding: 24px 100px 0px;
     background: $grayBackground;
     border-bottom: 1px solid $grayBorder;
     @include display-flex(flex-start, center, column);
-    .header__top {
+    .subNav__top {
       width: 100%;
       h1 {
         font-size: 18px;
@@ -86,7 +133,7 @@ export default {
       }
     }
   }
-  .header__bottom {
+  .subNav__bottom {
     @include display-flex(flex-start, center, row);
     width: 100%;
     div {
@@ -112,16 +159,66 @@ export default {
       cursor: pointer;
     }
   }
+
   .content {
     @include display-flex(flex-start, flex-start, row);
     padding: 16px 100px 0;
     min-height: calc(100vh - 320px);
-    .content__left {
-      width: 75%;
-      margin-right: 56px;
+    .column__left {
+      margin-right: 80px;
+      margin-top: 8px;
+      .header {
+        .header__back {
+          @include display-flex(flex-start, center, row);
+          color: #939396;
+          margin-bottom: 24px;
+          img {
+            margin-right: 6px;
+          }
+        }
+        .header__icon {
+          @include display-flex(center, center, row);
+          border: 1px solid $grayBorder;
+          border-radius: 3px;
+          height: 220px;
+          width: 220px;
+          margin-bottom: 24px;
+          img {
+            width: 50%;
+            border: none;
+          }
+        }
+        .header__title {
+          margin-bottom: 32px;
+          h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+          }
+          p {
+            font-size: 14px;
+            color: $colorFontLight;
+          }
+        }
+      }
+      .filters {
+        .filters__search {
+          margin-bottom: 16px;
+          input {
+            height: 40px;
+            width: 220px;
+            padding: 0 12px;
+            font-size: 13px;
+            border-radius: 3px;
+            border: 1px solid $grayBorder;
+          }
+          input:focus {
+            border: 1px solid $colorFontLight;
+          }
+        }
+      }
     }
-    .content__right {
-      width: 25%;
+    .column__right {
+      width: 80%;
     }
   }
 }

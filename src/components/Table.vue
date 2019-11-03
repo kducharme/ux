@@ -1,27 +1,9 @@
 <template>
   <div>
-    <div class="back">
-      <img src="../assets/chevron__back.svg" class="icon" />
-      <p>Back to all</p>
-    </div>
-    <div class="table__header">
-      <div class="table__header--left">
-        <div class="icon">
-          <img src="../assets/digital.svg" class="icon" />
-        </div>
-        <div class="title">
-          <h2>{{ activeCategory }} Tax Codes</h2>
-          <p>Showing {{tableResults.length}} of {{allCodes.length}} codes</p>
-        </div>
-      </div>
-      <div class="table__header--right">
-        <input type="text" placeholder="Search tax codes" v-model="search" />
-      </div>
-    </div>
     <table>
       <colgroup>
-        <col span="1" style="width: 5%;" />
-        <col span="1" style="width: 70;" />
+        <col span="1" style="width: 4%;" />
+        <col span="1" style="width: 71;" />
         <col span="1" style="width: 25%;" />
       </colgroup>
       <thead>
@@ -36,7 +18,7 @@
           <th class="code__sku">Tax Code</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="tableBody">
         <tr
           v-for="code in tableResults"
           :key="code.code"
@@ -67,43 +49,49 @@ export default {
       activeCode: {},
       selectedCodes: [],
       sortedCodes: [],
-      search: "",
+      results: [],
       activeCategory: "Digital & Software"
     };
   },
   props: {
     allCodes: {
       type: Array
+    },
+    searchTerm: {
+      type: String
     }
   },
   methods: {
     sortCodes: function() {
-     // TODO: make the codes sorted by grouo
+      // TODO: make the codes sorted by grouo
     },
     selectAll: function() {
       this.selectedCodes = [];
     },
     showDetails: function(code) {
-      this.$emit("showDetails", true)
-      this.$emit("activeCode", code)
+      this.$emit("showDetails", true);
+      this.$emit("activeCode", code);
     },
     sortCodes() {
-        console.log('hey')
-        return this.allCodes.sort((a, b) => a.name.localeCompare(b.name))
+      return this.allCodes.sort((a, b) => a.name.localeCompare(b.name));
     }
   },
   computed: {
     ...mapState(["codes"]),
     tableResults() {
-      this.sortCodes()
-      if (!this.search) return this.allCodes;
-      return this.allCodes.filter(allCodes => {
-        if (allCodes.name.toLowerCase().includes(this.search.toLowerCase())) {
-          return allCodes;
+      this.sortCodes();
+      if (!this.searchTerm) {
+        return this.allCodes;
+      }
+      return this.allCodes.filter(code => {
+        if (
+          code.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        ) {
+          return code;
         }
       });
     }
-  },
+  }
 };
 </script>
 
@@ -170,9 +158,21 @@ export default {
   transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }
 
+.title {
+  margin: 16px 0;
+  h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 14px;
+    color: $colorFontLight;
+  }
+}
+
 .table__header {
-  @include display-flex(space-between, flex-start, row);
-  margin: 8px 0 24px 0;
+  // @include display-flex(space-between, flex-start, row);
+  // margin: 8px 0 24px 0;
   p {
     color: $colorFontLight;
   }
@@ -187,17 +187,6 @@ export default {
       img {
         width: 46px;
         border: none;
-      }
-    }
-    .title {
-      margin-left: 16px;
-      h2 {
-        font-size: 16px;
-        margin-bottom: 12px;
-      }
-      p {
-        font-size: 14px;
-        color: $colorFontLight;
       }
     }
   }
@@ -215,7 +204,13 @@ export default {
     }
   }
 }
+
+.results {
+  margin-top: 16px;
+}
+
 table {
+  margin-top: 18px;
   width: 100%;
   border: 1px solid $grayBorder;
   table-layout: fixed;
@@ -226,7 +221,7 @@ table {
   font-weight: $weightLight;
   thead {
     text-align: left;
-    background-color: $grayBackground;
+    // background-color: $grayBackground;
     border: none !important;
     border-bottom: 1px solid $grayBorder;
     color: $colorFontLight;
