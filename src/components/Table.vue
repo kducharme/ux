@@ -2,8 +2,8 @@
   <div>
     <table>
       <colgroup>
-        <col span="1" style="width: 4%;" />
-        <col span="1" style="width: 71;" />
+        <col span="1" style="width: 3.5%;" />
+        <col span="1" style="width: 71.5;" />
         <col span="1" style="width: 25%;" />
       </colgroup>
       <thead>
@@ -25,17 +25,8 @@
           :class="[selectedCodes.includes(item.code) ? 'selectedRow' : '']"
         >
           <td>
-            <!-- <div class="code__select">
-              <input type="checkbox" :value="item.code" :item="item.code" v-model="selectedCodes" />
-              <label :for="item.code"></label>
-            </div> -->
-            <div class="product__select">
-              <input
-                type="checkbox"
-                :value="item.code"
-                :id="item.code"
-                v-model="selectedCodes"
-              />
+            <div class="item__select">
+              <input type="checkbox" :value="item.code" :id="item.code" v-model="selectedCodes" />
               <label :for="item.code"></label>
             </div>
           </td>
@@ -44,6 +35,16 @@
         </tr>
       </tbody>
     </table>
+    <div :class="[selectedCodes.length === 0 ? 'hideActions' : 'showActions']" class="actions">
+      <div class="actions__left">
+        <p class="context__count">{{selectedCodes.length}} products selected</p>
+        <p class="context__deselect" v-on:click="selectAll">(Deselect all)</p>
+      </div>
+      <div class="actions__right">
+        <button class="btn btn__primary">Copy</button>
+        <button class="btn btn__secondary">Favorite</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -115,43 +116,54 @@ export default {
   }
 }
 
-.table__actions {
-  @include display-flex(flex-start, center, row);
+.actions {
+  @include display-flex(space-between, center, row);
   bottom: 0px;
   width: 100%;
-  height: 56px;
+  height: 72px;
   background: white;
   border: 1px solid $grayBorder;
   position: -webkit-sticky;
   position: sticky;
   padding: 0 16px;
   box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
-  button {
-    background: $colorTaxJar;
-    height: 38px;
-    border-radius: 3px;
-    color: white;
-    font-weight: $weightMedium;
-    margin-right: 16px;
-    padding: 0 8px;
+  .actions__left {
+    width: 50%;
+      @include display-flex(flex-start, center, row);
+      .context__count {
+        margin-right: 6px;
+      }
+      .context__deselect {
+        color: $colorFontLight;
+      }
+      .context__deselect:hover {
+        text-decoration: underline;
+        color: $colorFontDark;
+        cursor: pointer;
+      }
   }
-  button:hover {
-    background: $colorTaxJarHover;
+  .actions__right {
+    width: 50%;
+    @include display-flex(flex-end, center, row);
+    .btn {
+      height: 40px;
+      border: none;
+      border-radius: 3px;
+      font-weight: $weightHeavy;
+      width: 100px;
+    }
+    .btn__primary {
+      color: white;
+      background: $colorTaxJar;
+      margin-right: 16px;
+    }
+    .btn__secondary {
+      color: $colorFontMedium;
+      border: 1px solid $grayBorder;
+      font-weight: $weightLight;
+    }
   }
-  .table__actions--context {
-    @include display-flex(flex-start, center, row);
-    .context__count {
-      margin-right: 6px;
-    }
-    .context__deselect {
-      color: $colorFontLight;
-    }
-    .context__deselect:hover {
-      text-decoration: underline;
-      color: $colorFontDark;
-      cursor: pointer;
-    }
-  }
+  // Button style - need to move to global
 }
 
 .showActions {
@@ -323,7 +335,7 @@ table {
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  fill='white' width='20' height='18' stroke='white' stroke-width='.8' viewBox='0 0 26 26'><path d='M9 16.17L5.53 12.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L9 16.17z'/></svg>");
   position: absolute;
   top: 0em;
-  left: -0.1em;
+  left: -0.05em;
   color: white;
   transition: all 0.25s;
 }
