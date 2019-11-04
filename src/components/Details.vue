@@ -5,6 +5,8 @@
         <div class="icon">
           <img src="../assets/digital.svg" class="icon" />
         </div>
+        <button class="btn btn__primary">Copy code</button>
+        <button class="btn btn__secondary">Save for later</button>
       </div>
       <div class="details__column--right">
         <div class="title">
@@ -102,10 +104,28 @@ export default {
         border-radius: 3px;
         height: 160px;
         width: 160px;
+        margin-bottom: 24px;
         img {
           width: 80%;
           border: none;
         }
+      }
+      .btn {
+        height: 40px;
+        width: 100%;
+        border: none;
+        border-radius: 3px;
+        font-weight: $weightHeavy;
+      }
+      .btn__primary {
+        color: white;
+        background: $colorTaxJar;
+      }
+      .btn__secondary {
+        color: $colorFontMedium;
+        border: 1px solid $grayBorder;
+        font-weight: $weightLight;
+        margin-top: 16px;
       }
     }
     .details__column--right {

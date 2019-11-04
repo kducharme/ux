@@ -1,27 +1,9 @@
 <template>
   <div>
-    <div class="back">
-      <img src="../assets/chevron__back.svg" class="icon" />
-      <p>Back to all</p>
-    </div>
-    <div class="table__header">
-      <div class="table__header--left">
-        <div class="icon">
-          <img src="../assets/digital.svg" class="icon" />
-        </div>
-        <div class="title">
-          <h2>{{ activeCategory }} Tax Codes</h2>
-          <p>Showing {{tableResults.length}} of {{allCodes.length}} codes</p>
-        </div>
-      </div>
-      <div class="table__header--right">
-        <input type="text" placeholder="Search tax codes" v-model="search" />
-      </div>
-    </div>
     <table>
       <colgroup>
-        <col span="1" style="width: 5%;" />
-        <col span="1" style="width: 70;" />
+        <col span="1" style="width: 3.5%;" />
+        <col span="1" style="width: 71.5;" />
         <col span="1" style="width: 25%;" />
       </colgroup>
       <thead>
@@ -36,23 +18,33 @@
           <th class="code__sku">Tax Code</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="tableBody">
         <tr
-          v-for="code in tableResults"
-          :key="code.code"
-          :class="[selectedCodes.includes(code.code) ? 'selectedRow' : '']"
+          v-for="item in tableResults"
+          :key="item.code"
+          :class="[selectedCodes.includes(item.code) ? 'selectedRow' : '']"
         >
           <td>
-            <div class="code__select">
-              <input type="checkbox" :value="code.code" :code="code.code" v-model="selectedCodes" />
-              <label :for="code.code"></label>
+            <div class="item__select">
+              <input type="checkbox" :value="item.code" :id="item.code" v-model="selectedCodes" />
+              <label :for="item.code"></label>
             </div>
           </td>
-          <td class="code__name" v-on:click="showDetails(code)">{{ code.name }}</td>
-          <td class="code__sku">{{ code.code }}</td>
+          <td class="code__name" v-on:click="showDetails(item)">{{ item.name }}</td>
+          <td class="code__sku">{{ item.code }}</td>
         </tr>
       </tbody>
     </table>
+    <div :class="[selectedCodes.length === 0 ? 'hideActions' : 'showActions']" class="actions">
+      <div class="actions__left">
+        <p class="context__count">{{selectedCodes.length}} products selected</p>
+        <p class="context__deselect" v-on:click="selectAll">(Deselect all)</p>
+      </div>
+      <div class="actions__right">
+        <button class="btn btn__primary">Copy</button>
+        <button class="btn btn__secondary">Favorite</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -67,43 +59,47 @@ export default {
       activeCode: {},
       selectedCodes: [],
       sortedCodes: [],
-      search: "",
+      results: [],
       activeCategory: "Digital & Software"
     };
   },
   props: {
     allCodes: {
       type: Array
+    },
+    searchTerm: {
+      type: String
     }
   },
   methods: {
     sortCodes: function() {
-     // TODO: make the codes sorted by grouo
+      // TODO: make the codes sorted by grouo
     },
     selectAll: function() {
       this.selectedCodes = [];
     },
     showDetails: function(code) {
-      this.$emit("showDetails", true)
-      this.$emit("activeCode", code)
+      this.$emit("showDetails", true);
+      this.$emit("activeCode", code);
     },
     sortCodes() {
-        console.log('hey')
-        return this.allCodes.sort((a, b) => a.name.localeCompare(b.name))
+      return this.allCodes.sort((a, b) => a.name.localeCompare(b.name));
     }
   },
   computed: {
     ...mapState(["codes"]),
     tableResults() {
-      this.sortCodes()
-      if (!this.search) return this.allCodes;
-      return this.allCodes.filter(allCodes => {
-        if (allCodes.name.toLowerCase().includes(this.search.toLowerCase())) {
-          return allCodes;
+      this.sortCodes();
+      if (!this.searchTerm) {
+        return this.allCodes;
+      }
+      return this.allCodes.filter(code => {
+        if (code.name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
+          return code;
         }
       });
     }
-  },
+  }
 };
 </script>
 
@@ -120,43 +116,54 @@ export default {
   }
 }
 
-.table__actions {
-  @include display-flex(flex-start, center, row);
+.actions {
+  @include display-flex(space-between, center, row);
   bottom: 0px;
   width: 100%;
-  height: 56px;
+  height: 72px;
   background: white;
   border: 1px solid $grayBorder;
   position: -webkit-sticky;
   position: sticky;
   padding: 0 16px;
   box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
-  button {
-    background: $colorTaxJar;
-    height: 38px;
-    border-radius: 3px;
-    color: white;
-    font-weight: $weightMedium;
-    margin-right: 16px;
-    padding: 0 8px;
+  .actions__left {
+    width: 50%;
+      @include display-flex(flex-start, center, row);
+      .context__count {
+        margin-right: 6px;
+      }
+      .context__deselect {
+        color: $colorFontLight;
+      }
+      .context__deselect:hover {
+        text-decoration: underline;
+        color: $colorFontDark;
+        cursor: pointer;
+      }
   }
-  button:hover {
-    background: $colorTaxJarHover;
+  .actions__right {
+    width: 50%;
+    @include display-flex(flex-end, center, row);
+    .btn {
+      height: 40px;
+      border: none;
+      border-radius: 3px;
+      font-weight: $weightHeavy;
+      width: 100px;
+    }
+    .btn__primary {
+      color: white;
+      background: $colorTaxJar;
+      margin-right: 16px;
+    }
+    .btn__secondary {
+      color: $colorFontMedium;
+      border: 1px solid $grayBorder;
+      font-weight: $weightLight;
+    }
   }
-  .table__actions--context {
-    @include display-flex(flex-start, center, row);
-    .context__count {
-      margin-right: 6px;
-    }
-    .context__deselect {
-      color: $colorFontLight;
-    }
-    .context__deselect:hover {
-      text-decoration: underline;
-      color: $colorFontDark;
-      cursor: pointer;
-    }
-  }
+  // Button style - need to move to global
 }
 
 .showActions {
@@ -170,9 +177,21 @@ export default {
   transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }
 
+.title {
+  margin: 16px 0;
+  h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 14px;
+    color: $colorFontLight;
+  }
+}
+
 .table__header {
-  @include display-flex(space-between, flex-start, row);
-  margin: 8px 0 24px 0;
+  // @include display-flex(space-between, flex-start, row);
+  // margin: 8px 0 24px 0;
   p {
     color: $colorFontLight;
   }
@@ -187,17 +206,6 @@ export default {
       img {
         width: 46px;
         border: none;
-      }
-    }
-    .title {
-      margin-left: 16px;
-      h2 {
-        font-size: 16px;
-        margin-bottom: 12px;
-      }
-      p {
-        font-size: 14px;
-        color: $colorFontLight;
       }
     }
   }
@@ -215,7 +223,13 @@ export default {
     }
   }
 }
+
+.results {
+  margin-top: 16px;
+}
+
 table {
+  margin-top: 44px;
   width: 100%;
   border: 1px solid $grayBorder;
   table-layout: fixed;
@@ -224,15 +238,17 @@ table {
   border-radius: 3px;
   font-size: 14px;
   font-weight: $weightLight;
+  // height: calc(100vh - 68px - 111px - 32px);
   thead {
     text-align: left;
-    background-color: $grayBackground;
     border: none !important;
+    background: $grayBackground;
     border-bottom: 1px solid $grayBorder;
     color: $colorFontLight;
     font-weight: $weightHeavy;
     tr {
       height: 48px;
+      max-height: 48px;
       border: none;
     }
     th {
@@ -319,7 +335,7 @@ table {
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  fill='white' width='20' height='18' stroke='white' stroke-width='.8' viewBox='0 0 26 26'><path d='M9 16.17L5.53 12.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L9 16.17z'/></svg>");
   position: absolute;
   top: 0em;
-  left: -0.1em;
+  left: -0.05em;
   color: white;
   transition: all 0.25s;
 }

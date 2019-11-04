@@ -1,8 +1,10 @@
 <template>
-  <div class="filter">
-    <p class="filter__title">Filter by category</p>
-    <p class="filter__option filter__active">All categories</p>
-    <p class="filter__option" v-for="category in sortCategories" :key="category.id">{{ category }}</p>
+  <div class="tableFilters">
+    <div class="filter">
+      <p class="filter__title">Filter by category</p>
+      <!-- <p class="filter__option filter__active">All categories</p> -->
+      <p class="filter__option" v-for="category in sortCategories" :key="category.id">{{ category }}</p>
+    </div>
   </div>
 </template>
 
@@ -37,8 +39,11 @@ export default {
 @import "../styles/variables.scss";
 @import "../styles/mixins.scss";
 
-.filter {
+.tableFilters {
   margin-top: 32px;
+  .filter {
+    margin-top: 32px;
+  }
   .filter__title {
     font-weight: $weightHeavy;
     color: #88888b;
