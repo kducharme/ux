@@ -182,13 +182,13 @@ export default {
 
 .showActions {
   transform: translateY(0px);
-  transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
+  transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }
 
 .hideActions {
   opacity: 0;
   transform: translateY(60px);
-  transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
+  transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }
 
 .title {
