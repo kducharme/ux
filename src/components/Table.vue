@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table>
+  <div class="page__table">
+    <table id="codeTable">
       <colgroup>
         <col span="1" style="width: 3.5%;" />
         <col span="1" style="width: 71.5;" />
@@ -96,6 +96,12 @@ export default {
 
       const data = encodeURI(csvContent);
       window.open(data);
+    },
+    handleResize() {
+      let tableWidth = document.getElementById("codeTable").offsetWidth;
+      let actions = document.querySelector('.actions')
+      actions.style.width = tableWidth + "px";
+      console.log(width);
     }
   },
   computed: {
@@ -111,6 +117,13 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
   }
 };
 </script>
@@ -119,187 +132,191 @@ export default {
 @import "../styles/variables.scss";
 @import "../styles/mixins.scss";
 
-.back {
-  @include display-flex(flex-start, center, row);
-  color: #939396;
-  margin-bottom: 16px;
-  img {
-    margin-right: 6px;
-  }
-}
-
-.actions {
-  @include display-flex(space-between, center, row);
-  bottom: 0px;
-  margin-top: -2px;
+.page__table {
   width: 100%;
-  height: 72px;
-  background: white;
-  border: 1px solid $grayBorder;
-  position: -webkit-sticky;
-  position: sticky;
-  padding: 0 16px;
-  box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
-  .actions__left {
-    width: 50%;
+
+  .back {
     @include display-flex(flex-start, center, row);
-    .context__count {
+    color: #939396;
+    margin-bottom: 16px;
+    img {
       margin-right: 6px;
     }
-    .context__deselect {
-      color: $colorFontLight;
-    }
-    .context__deselect:hover {
-      text-decoration: underline;
-      color: $colorFontDark;
-      cursor: pointer;
-    }
   }
-  .actions__right {
-    width: 50%;
-    @include display-flex(flex-end, center, row);
-    .btn {
-      height: 40px;
-      border: none;
-      border-radius: 3px;
-      font-weight: $weightHeavy;
-      width: 100px;
-    }
-    .btn__primary {
-      width: 132px;
-      color: white;
-      background: $colorTaxJar;
-      margin-right: 16px;
-    }
-    .btn__secondary {
-      color: $colorFontMedium;
-      border: 1px solid $grayBorder;
-      font-weight: $weightLight;
-    }
-  }
-  // Button style - need to move to global
-}
 
-.showActions {
-  transform: translateY(0px);
-  transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
-}
-
-.hideActions {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
-}
-
-.title {
-  margin: 16px 0;
-  h2 {
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-  p {
-    font-size: 14px;
-    color: $colorFontLight;
-  }
-}
-
-.table__header {
-  // @include display-flex(space-between, flex-start, row);
-  // margin: 8px 0 24px 0;
-  p {
-    color: $colorFontLight;
-  }
-  .table__header--left {
-    @include display-flex(flex-start, center, row);
-    .icon {
-      @include display-flex(center, center, row);
-      border: 1px solid $grayBorder;
-      border-radius: 3px;
-      height: 64px;
-      width: 64px;
-      img {
-        width: 46px;
+  .actions {
+    @include display-flex(space-between, center, row);
+    margin-top: -2px;
+    height: 72px;
+    background: white;
+    border: 1px solid $grayBorder;
+    // position: -webkit-sticky;
+    padding: 0 16px;
+    box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
+    bottom: 0px;
+    // width: inherit;
+    // max-width: inherit;
+    position: fixed;
+    .actions__left {
+      width: 50%;
+      @include display-flex(flex-start, center, row);
+      .context__count {
+        margin-right: 6px;
+      }
+      .context__deselect {
+        color: $colorFontLight;
+      }
+      .context__deselect:hover {
+        text-decoration: underline;
+        color: $colorFontDark;
+        cursor: pointer;
+      }
+    }
+    .actions__right {
+      width: 50%;
+      @include display-flex(flex-end, center, row);
+      .btn {
+        height: 40px;
         border: none;
+        border-radius: 3px;
+        font-weight: $weightHeavy;
+        width: 100px;
+      }
+      .btn__primary {
+        width: 132px;
+        color: white;
+        background: $colorTaxJar;
+        margin-right: 16px;
+      }
+      .btn__secondary {
+        color: $colorFontMedium;
+        border: 1px solid $grayBorder;
+        font-weight: $weightLight;
       }
     }
   }
-  .table__header--right {
-    input {
-      height: 40px;
-      width: 280px;
-      padding: 0 12px;
-      font-size: 13px;
-      border-radius: 3px;
-      border: 1px solid $grayBorder;
-    }
-    input:focus {
-      border: 1px solid $colorFontLight;
-    }
-  }
-}
 
-.results {
-  margin-top: 16px;
-}
-
-table {
-  margin-top: 44px;
-  width: 100%;
-  border: 1px solid $grayBorder;
-  table-layout: fixed;
-  background: white;
-  border-spacing: 0px;
-  border-radius: 3px;
-  font-size: 14px;
-  font-weight: $weightLight;
-  // height: calc(100vh - 68px - 111px - 32px);
-  thead {
-    text-align: left;
-    border: none !important;
-    background: $grayBackground;
-    border-bottom: 1px solid $grayBorder;
-    color: $colorFontLight;
-    font-weight: $weightHeavy;
-    tr {
-      height: 48px;
-      max-height: 48px;
-      border: none;
-    }
-    th {
-      padding: 0 16px;
-      border-bottom: 1px solid $grayBorder;
-    }
+  .showActions {
+    transform: translateY(0px);
+    transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
   }
-  tbody {
-    tr {
-      height: 44px;
+
+  .hideActions {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
+  }
+
+  .title {
+    margin: 16px 0;
+    h2 {
+      font-size: 16px;
+      margin-bottom: 8px;
     }
-    td {
-      color: $colorFontMedium;
-      border-bottom: 1px solid $grayBorder;
-      padding: 0 16px;
-    }
-    .selectedRow {
-      background: $colorBlueLight;
-    }
-    .code__name {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: $colorBlueDark;
-    }
-    .code__name:hover {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-    .uncategorized {
-      width: 84px !important;
-      background: #eeeeee;
+    p {
+      font-size: 14px;
       color: $colorFontLight;
-      padding: 4px 10px;
-      border-radius: 16px;
-      font-size: 13px;
-      font-weight: $weightMedium;
+    }
+  }
+
+  .table__header {
+    // @include display-flex(space-between, flex-start, row);
+    // margin: 8px 0 24px 0;
+    p {
+      color: $colorFontLight;
+    }
+    .table__header--left {
+      @include display-flex(flex-start, center, row);
+      .icon {
+        @include display-flex(center, center, row);
+        border: 1px solid $grayBorder;
+        border-radius: 3px;
+        height: 64px;
+        width: 64px;
+        img {
+          width: 46px;
+          border: none;
+        }
+      }
+    }
+    .table__header--right {
+      input {
+        height: 40px;
+        width: 280px;
+        padding: 0 12px;
+        font-size: 13px;
+        border-radius: 3px;
+        border: 1px solid $grayBorder;
+      }
+      input:focus {
+        border: 1px solid $colorFontLight;
+      }
+    }
+  }
+
+  .results {
+    margin-top: 16px;
+  }
+
+  table {
+    margin-top: 44px;
+    width: 100%;
+    border: 1px solid $grayBorder;
+    table-layout: fixed;
+    background: white;
+    border-spacing: 0px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: $weightLight;
+    // height: calc(100vh - 68px - 111px - 32px);
+    thead {
+      text-align: left;
+      border: none !important;
+      background: $grayBackground;
+      border-bottom: 1px solid $grayBorder;
+      color: $colorFontLight;
+      font-weight: $weightHeavy;
+      tr {
+        height: 48px;
+        max-height: 48px;
+        border: none;
+      }
+      th {
+        padding: 0 16px;
+        border-bottom: 1px solid $grayBorder;
+      }
+    }
+    tbody {
+      tr {
+        height: 44px;
+      }
+      td {
+        color: $colorFontMedium;
+        border-bottom: 1px solid $grayBorder;
+        padding: 0 16px;
+      }
+      .selectedRow {
+        background: $colorBlueLight;
+      }
+      .code__name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $colorBlueDark;
+      }
+      .code__name:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      .uncategorized {
+        width: 84px !important;
+        background: #eeeeee;
+        color: $colorFontLight;
+        padding: 4px 10px;
+        border-radius: 16px;
+        font-size: 13px;
+        font-weight: $weightMedium;
+      }
     }
   }
 }
