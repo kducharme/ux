@@ -2,7 +2,7 @@
   <div class="tableFilters">
     <div class="filter">
       <p class="filter__title">Filter by category</p>
-      <p class="filter__option filter__active">All categories</p>
+      <!-- <p class="filter__option filter__active">All categories</p> -->
       <p class="filter__option" v-for="category in sortCategories" :key="category.id">{{ category }}</p>
     </div>
   </div>

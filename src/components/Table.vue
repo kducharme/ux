@@ -20,18 +20,27 @@
       </thead>
       <tbody id="tableBody">
         <tr
-          v-for="code in tableResults"
-          :key="code.code"
-          :class="[selectedCodes.includes(code.code) ? 'selectedRow' : '']"
+          v-for="item in tableResults"
+          :key="item.code"
+          :class="[selectedCodes.includes(item.code) ? 'selectedRow' : '']"
         >
           <td>
-            <div class="code__select">
-              <input type="checkbox" :value="code.code" :code="code.code" v-model="selectedCodes" />
-              <label :for="code.code"></label>
+            <!-- <div class="code__select">
+              <input type="checkbox" :value="item.code" :item="item.code" v-model="selectedCodes" />
+              <label :for="item.code"></label>
+            </div> -->
+            <div class="product__select">
+              <input
+                type="checkbox"
+                :value="item.code"
+                :id="item.code"
+                v-model="selectedCodes"
+              />
+              <label :for="item.code"></label>
             </div>
           </td>
-          <td class="code__name" v-on:click="showDetails(code)">{{ code.name }}</td>
-          <td class="code__sku">{{ code.code }}</td>
+          <td class="code__name" v-on:click="showDetails(item)">{{ item.name }}</td>
+          <td class="code__sku">{{ item.code }}</td>
         </tr>
       </tbody>
     </table>
@@ -208,7 +217,7 @@ export default {
 }
 
 table {
-  margin-top: 18px;
+  margin-top: 44px;
   width: 100%;
   border: 1px solid $grayBorder;
   table-layout: fixed;
@@ -221,6 +230,7 @@ table {
   thead {
     text-align: left;
     border: none !important;
+    background: $grayBackground;
     border-bottom: 1px solid $grayBorder;
     color: $colorFontLight;
     font-weight: $weightHeavy;

@@ -1,4 +1,3 @@
-
 <template>
   <div class="products">
     <Details :details="this.detailsActive" :code="this.activeCode" @hideDetails="hideDetails" />
@@ -6,7 +5,7 @@
     <!-- Page subnavigation -->
     <div class="subNav">
       <div class="subNav__top">
-        <!-- <h1>Product exemptions</h1> -->
+        <h1>Product exemptions</h1>
       </div>
       <div class="subNav__bottom">
         <div>Map products</div>
@@ -17,35 +16,24 @@
     <!-- Main content -->
     <div class="content">
       <!-- Left column -->
-      <div class="column__left">
+      <div class="row__top">
         <!-- Header section -->
         <div class="header">
-          <div class="header__back">
-            <img src="../assets/chevron__back.svg" class="icon" />
-            <p>Back to all</p>
+          <div class="header__left">
+            <p>All codes</p>
+            <img src="../assets/breadcrumb.svg" class="icon" />
+            <p class="activeBreadcrumb">Digital & Software</p>
           </div>
-          <div class="header__icon">
-            <img src="../assets/digital.svg" class="icon" />
-          </div>
-        </div>
-
-        <!-- Table filters -->
-        <div class="sticky">
-          <div class="title">
-            <h2>{{ activeCategory }}</h2>
-            <p>Showing {{ this.results }} of {{allCodes.length}} tax codes</p>
-          </div>
-          <div class="filters">
+          <div class="header__right">
             <div class="filters__search">
               <input type="text" placeholder="Filter codes by name..." v-model="search" />
             </div>
-            <Filters :allCodes="this.allCodes" />
           </div>
         </div>
       </div>
 
       <!-- Right column -->
-      <div class="column__right">
+      <div class="row__bottom">
         <Table
           @showDetails="showDetails"
           @activeCode="codeDetails"
@@ -122,7 +110,7 @@ export default {
 .products {
   height: 100vh;
   .subNav {
-    padding: 16px 100px 0px;
+    padding: 24px 100px 0px;
     // background: $grayBackground;
     border-bottom: 1px solid $grayBorder;
     @include display-flex(flex-start, center, column);
@@ -131,7 +119,7 @@ export default {
       h1 {
         font-size: 18px;
         color: $colorFontDark;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
       }
     }
   }
@@ -163,46 +151,67 @@ export default {
   }
 
   .content {
-    @include display-flex(flex-start, flex-start, row);
-    padding: 12px 100px 0;
+    @include display-flex(flex-start, flex-start, column);
+    padding: 24px 100px 0;
     min-height: calc(100vh - 320px);
-    .column__left {
-      margin-right: 72px;
-      margin-top: 8px;
-      width: 20%;
+    .row__top {
+      width: 100%;
+      // @include display-flex(space-between, center, row);
+      // width: 20%;
       // position: -webkit-sticky;
       // position: sticky;
       // top: 24px;
       .header {
-        .header__back {
-          @include display-flex(flex-start, center, row);
+        width: 100%;
+        @include display-flex(space-between, center, row);
+        .header__left {
+        @include display-flex(flex-start, center, row);
           color: #939396;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
+            width: 50%;
           img {
-            margin-right: 6px;
+            margin: 0 8px;
+          }
+          .activeBreadcrumb {
+            font-weight: $weightHeavy;
+            color: $colorFontDark;
+          }
+        }
+        .header__right {
+          width: 50;
+          input {
+            height: 40px;
+            width: 240px;
+            padding: 0 12px;
+            font-size: 13px;
+            border-radius: 3px;
+            border: 1px solid $grayBorder;
+          }
+          input:focus {
+            border: 1px solid $colorFontLight;
           }
         }
         .header__icon {
           @include display-flex(center, center, row);
           border: 1px solid $grayBorder;
           border-radius: 3px;
-          width: 220px;
-          height: 220px;
+          height: 200px;
+          width: 200px;
           margin-bottom: 24px;
           img {
-            width: 58%;
+            width: 50%;
             border: none;
           }
         }
       }
-      .sticky {
+      .header__title {
         position: -webkit-sticky;
         position: sticky;
         top: 0px;
         .title {
           margin-bottom: 24px;
           h2 {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 10px;
           }
           p {
@@ -213,23 +222,12 @@ export default {
         .filters {
           .filters__search {
             margin-bottom: 32px;
-            input {
-              height: 40px;
-              width: 220px;
-              padding: 0 12px;
-              font-size: 13px;
-              border-radius: 3px;
-              border: 1px solid $grayBorder;
-            }
-            input:focus {
-              border: 1px solid $colorFontLight;
-            }
           }
         }
       }
     }
-    .column__right {
-      width: 80%;
+    .row__bottom {
+      // width: 80%;
     }
   }
 }
