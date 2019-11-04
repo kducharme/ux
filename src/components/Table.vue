@@ -26,7 +26,7 @@
         >
           <td>
             <div class="item__select">
-              <input type="checkbox" :value="item.code" :id="item.code" v-model="selectedCodes" />
+              <input type="checkbox" :value="item" :id="item.code" v-model="selectedCodes" />
               <label :for="item.code"></label>
             </div>
           </td>
@@ -41,7 +41,7 @@
         <p class="context__deselect" v-on:click="selectAll">(Deselect all)</p>
       </div>
       <div class="actions__right">
-        <button class="btn btn__primary">Copy</button>
+        <button class="btn btn__primary" v-on:click="downloadFile">Download CSV</button>
         <button class="btn btn__secondary">Favorite</button>
       </div>
     </div>
@@ -84,6 +84,18 @@ export default {
     },
     sortCodes() {
       return this.allCodes.sort((a, b) => a.name.localeCompare(b.name));
+    },
+    downloadFile: function() {
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += [
+        Object.keys(this.selectedCodes[0]).join(";"),
+        ...this.selectedCodes.map(item => Object.values(item).join(";"))
+      ]
+        .join("\n")
+        .replace(/(^\[)|(\]$)/gm, "");
+
+      const data = encodeURI(csvContent);
+      window.open(data);
     }
   },
   computed: {
@@ -119,6 +131,7 @@ export default {
 .actions {
   @include display-flex(space-between, center, row);
   bottom: 0px;
+  margin-top: -2px;
   width: 100%;
   height: 72px;
   background: white;
@@ -129,18 +142,18 @@ export default {
   box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
   .actions__left {
     width: 50%;
-      @include display-flex(flex-start, center, row);
-      .context__count {
-        margin-right: 6px;
-      }
-      .context__deselect {
-        color: $colorFontLight;
-      }
-      .context__deselect:hover {
-        text-decoration: underline;
-        color: $colorFontDark;
-        cursor: pointer;
-      }
+    @include display-flex(flex-start, center, row);
+    .context__count {
+      margin-right: 6px;
+    }
+    .context__deselect {
+      color: $colorFontLight;
+    }
+    .context__deselect:hover {
+      text-decoration: underline;
+      color: $colorFontDark;
+      cursor: pointer;
+    }
   }
   .actions__right {
     width: 50%;
@@ -153,6 +166,7 @@ export default {
       width: 100px;
     }
     .btn__primary {
+      width: 132px;
       color: white;
       background: $colorTaxJar;
       margin-right: 16px;
