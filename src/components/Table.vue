@@ -100,8 +100,8 @@ export default {
     handleResize() {
       let tableWidth = document.getElementById("codeTable").offsetWidth;
       let actions = document.querySelector('.actions')
+      actions.style.width = ""
       actions.style.width = tableWidth + "px";
-      console.log(width);
     }
   },
   computed: {
@@ -134,16 +134,6 @@ export default {
 
 .page__table {
   width: 100%;
-
-  .back {
-    @include display-flex(flex-start, center, row);
-    color: #939396;
-    margin-bottom: 16px;
-    img {
-      margin-right: 6px;
-    }
-  }
-
   .actions {
     @include display-flex(space-between, center, row);
     margin-top: -2px;
@@ -154,8 +144,6 @@ export default {
     padding: 0 16px;
     box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
     bottom: 0px;
-    // width: inherit;
-    // max-width: inherit;
     position: fixed;
     .actions__left {
       width: 50%;
@@ -218,52 +206,11 @@ export default {
       color: $colorFontLight;
     }
   }
-
-  .table__header {
-    // @include display-flex(space-between, flex-start, row);
-    // margin: 8px 0 24px 0;
-    p {
-      color: $colorFontLight;
-    }
-    .table__header--left {
-      @include display-flex(flex-start, center, row);
-      .icon {
-        @include display-flex(center, center, row);
-        border: 1px solid $grayBorder;
-        border-radius: 3px;
-        height: 64px;
-        width: 64px;
-        img {
-          width: 46px;
-          border: none;
-        }
-      }
-    }
-    .table__header--right {
-      input {
-        height: 40px;
-        width: 280px;
-        padding: 0 12px;
-        font-size: 13px;
-        border-radius: 3px;
-        border: 1px solid $grayBorder;
-      }
-      input:focus {
-        border: 1px solid $colorFontLight;
-      }
-    }
-  }
-
-  .results {
-    margin-top: 16px;
-  }
-
+  // Table styling
   table {
-    margin-top: 44px;
     width: 100%;
     border: 1px solid $grayBorder;
     table-layout: fixed;
-    background: white;
     border-spacing: 0px;
     border-radius: 3px;
     font-size: 14px;
@@ -316,6 +263,9 @@ export default {
         border-radius: 16px;
         font-size: 13px;
         font-weight: $weightMedium;
+      }
+      tr:last-child {
+        border: none;
       }
     }
   }

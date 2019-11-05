@@ -1,9 +1,20 @@
 <template>
   <div class="tableFilters">
-    <div class="filter">
-      <p class="filter__title">Filter by category</p>
-      <!-- <p class="filter__option filter__active">All categories</p> -->
-      <p class="filter__option" v-for="category in sortCategories" :key="category.id">{{ category }}</p>
+    <p class="tableFilters__title">Filter by category</p>
+    <div
+      class="filter"
+      v-for="category in allCategories"
+      :key="category.id"
+      v-on:click="setActiveCategory(category)"
+    >
+      <p
+        class="filter__name"
+        :class="[activeCategory === category ? 'filter__active filter__active--name' : '']"
+      >{{ category }}</p>
+      <p
+        class="filter__count"
+        :class="[activeCategory === category ? 'filter__active filter__active--count' : '']"
+      >32</p>
     </div>
   </div>
 </template>
@@ -15,7 +26,18 @@ export default {
   name: "Filters",
   data() {
     return {
-      uniqueCategories: []
+      uniqueCategories: [],
+      activeCategory: "All Categories",
+      allCategories: [
+        "All Categories",
+        "Clothing",
+        "Digital & Software",
+        "Food & Beverage",
+        "Manufacturing",
+        "Medical",
+        "Miscenllaneous",
+        "Telecommunications"
+      ]
     };
   },
   props: {
@@ -23,7 +45,12 @@ export default {
       type: Array
     }
   },
-  methods: {},
+  methods: {
+    setActiveCategory: function(category) {
+      this.activeCategory = category;
+      console.log(this.activeCategory);
+    }
+  },
   computed: {
     sortCategories() {
       this.uniqueCategories = [
@@ -41,22 +68,47 @@ export default {
 
 .tableFilters {
   margin-top: 32px;
-  .filter {
-    margin-top: 32px;
-  }
-  .filter__title {
+  width: 256px;
+  @include display-flex(flex-start, flex-start, column);
+  .tableFilters__title {
     font-weight: $weightHeavy;
     color: #88888b;
     margin-bottom: 16px;
   }
-  .filter__option {
-    color: $colorFontMedium;
-    padding: 8px 0;
-  }
+  .filter {
+    width: 100%;
+    @include display-flex(space-between, center, row);
+    .filter__name {
+      color: $colorFontMedium;
+      padding: 12px 0;
+    }
+    .filter__count {
+      @include display-flex(center, center, row);
+      color: #a2a2a2;
+      border: 1px solid $grayBorder;
+      font-size: 13px;
+      border-radius: 12px;
+      width: 52px;
+      height: 22px;
+    }
 
-  .filter__active {
-    color: $colorTaxJar;
-    font-weight: $weightHeavy;
+    .filter__active {
+      color: $colorTaxJar;
+      font-weight: $weightHeavy;
+    }
+    .filter__active--count {
+      color: $colorTaxJar;
+      border: 1px solid $colorTaxJar;
+    }
+  }
+  .filter:hover {
+    cursor: pointer;
+    .filter__name {
+      color: $colorFontDark;
+    }
+    .filter__active--name {
+      color: $colorTaxJar;
+    }
   }
 }
 </style>
