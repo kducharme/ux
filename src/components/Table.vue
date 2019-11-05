@@ -16,7 +16,7 @@
               <label for="selectAll"></label>
             </div>
           </th>
-          <th class="code__name">All Categories</th>
+          <th class="code__name">Digital & Software ({{ tableResults.length }})</th>
           <th></th>
           <th></th>
           <th></th>
@@ -37,6 +37,7 @@
           <td class="code__name code__overflow" v-on:click="showDetails(item)">{{ item.name }}</td>
           <td class="code__sku code__overflow">{{ item.code }}</td>
           <td class="code__copy" v-on:click="copyCode(item.code)">
+            <!-- SVG for copy icon -->
             <svg
               width="19px"
               height="22px"
@@ -68,8 +69,40 @@
               </g>
             </svg>
           </td>
-          <td class="code__favorite">
-            <img src="../assets/favorite.svg" class="code__favorite" />
+          <td class="code__favorite" v-on:click="favoriteCode(item)">
+            <!-- SVG for favorite icon -->
+            <svg
+              width="20px"
+              height="19px"
+              viewBox="0 0 20 19"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g
+                id="discovery-(round-5)"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+              >
+                <g
+                  id="tax-codes-copy"
+                  transform="translate(-1301.000000, -630.000000)"
+                  fill="#D6D6D6"
+                  fill-rule="nonzero"
+                >
+                  <g id="star_border-24px" transform="translate(1298.000000, 627.000000)">
+                    <path
+                      class="code__favorite--icon"
+                      :class="[item.code.favorite === true ? 'favorite' : '']"
+                      d="M21.2875,9.79333333 L16.0441667,9.33833333 L13.9966667,4.5175 C13.6283333,3.64 12.3716667,3.64 12.0033333,4.5175 L9.95583333,9.34916667 L4.72333333,9.79333333 C3.77,9.86916667 3.38,11.0608333 4.10583333,11.6891667 L8.08166667,15.1341667 L6.89,20.2475 C6.67333333,21.1791667 7.68083333,21.9158333 8.50416667,21.4175 L13,18.7091667 L17.4958333,21.4283333 C18.3191667,21.9266667 19.3266667,21.19 19.11,20.2583333 L17.9183333,15.1341667 L21.8941667,11.6891667 C22.62,11.0608333 22.2408333,9.86916667 21.2875,9.79333333 L21.2875,9.79333333 Z M13,16.6833333 L8.92666667,19.1425 L10.01,14.5058333 L6.41333333,11.3858333 L11.1583333,10.9741667 L13,6.60833333 L14.8525,10.985 L19.5975,11.3966667 L16.0008333,14.5166667 L17.0841667,19.1533333 L13,16.6833333 Z"
+                      id="Shape"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
           </td>
         </tr>
       </tbody>
@@ -124,6 +157,19 @@ export default {
     },
     sortCodes() {
       return this.allCodes.sort((a, b) => a.name.localeCompare(b.name));
+    },
+    favoriteCode: function(code) {
+      code.favorite = true;
+
+      return fetch(`http://localhost:3000/codes`, {
+        credentials: "same-origin", // 'include', default: 'omit'
+        method: "PUT", // 'GET', 'PUT', 'DELETE', etc.
+        body: JSON.stringify(code),
+        headers: new Headers({
+          "favorite": "true"
+        })
+      }).then(response => response.json());
+      console.log(response)
     },
     copyCode: function(code) {
       let temporaryInput = document.createElement("input");
@@ -321,8 +367,19 @@ export default {
       .code__copy:hover {
         cursor: pointer;
         .code__copy--icon {
+          transition: ease-in-out, fill 0.3s ease-in-out;
           fill: $colorFontMedium;
         }
+      }
+      .code__favorite:hover {
+        cursor: pointer;
+        .code__favorite--icon {
+          transition: ease-in-out, fill 0.3s ease-in-out;
+          fill: $colorFontMedium;
+        }
+      }
+      .favorite {
+        fill: red;
       }
     }
     tr:last-child {

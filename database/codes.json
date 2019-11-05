@@ -1,434 +1,724 @@
 {
   "codes": [
     {
-      "code": "43230000A1100",
-      "name": "Software - Prewritten, tangible media",
-      "category": "Software"
-    },
-    {
+      "id": 1,
       "code": "43230000A1200",
+      "rule": "A001001",
       "name": "Software - Prewritten, electronic delivery",
+      "Description": "Software - Prewritten & delivered on tangible media",
       "category": "Software"
     },
     {
-      "code": "43230000A1300",
-      "name": "Software - Prewritten, load and leave delivery",
-      "category": "Software"
-    },
-    {
-      "code": "43230000A1400",
-      "name": "Software - Prewritten, delivered by digital keycode printed on tangible media",
-      "category": "Software"
-    },
-    {
-      "code": "43230000A2100",
-      "name": "Software - Custom, tangible media",
-      "category": "Software"
-    },
-    {
-      "code": "43230000A2200",
-      "name": "Software - Custom, electronic delivery",
-      "category": "Software"
-    },
-    {
-      "code": "43230000A2300",
-      "name": "Software - Custom, load and leave delivery",
-      "category": "Software"
-    },
-    {
-      "code": "55111500A1210",
-      "name": "Electronic publications and music - Delivered electronically with permanent rights of usage",
-      "category": "Multimedia"
-    },
-    {
-      "code": "55111500A1220",
-      "name": "Electronic publications and music - Delivered electronically with less than permanent rights of usage",
-      "category": "Multimedia"
-    },
-    {
-      "code": "55111500A1500",
-      "name": "Electronic publications and music - Streamed",
-      "category": "Multimedia"
-    },
-    {
-      "code": "55111601A1100",
-      "name": "Electronic software documentation or user manuals - Prewritten, tangible media",
-      "category": "Documentation"
-    },
-    {
+      "id": 2,
       "code": "55111601A1200",
+      "rule": "A001001",
       "name": "Electronic software documentation or user manuals - Prewritten, electronic delivery",
+      "Description": "Electronic publications and music - Streamed",
       "category": "Documentation"
     },
     {
+      "id": 3,
+      "code": "43230000A1300",
+      "rule": "A001002",
+      "name": "Software - Prewritten, load and leave delivery",
+      "Description": "Software - Prewritten & delivered electronically",
+      "category": "Software"
+    },
+    {
+      "id": 4,
       "code": "55111601A1300",
+      "rule": "A001002",
       "name": "Electronic software documentation or user manuals - Prewritten, load and leave delivery",
+      "Description": "Electronic software documentation or user manuals - For prewritten software & delivered on tangible media",
       "category": "Documentation"
     },
     {
+      "id": 5,
+      "code": "43230000A1400",
+      "rule": "A001003",
+      "name": "Software - Prewritten, delivered by digital keycode printed on tangible media",
+      "Description": "Software - Prewritten & delivered by load and leave",
+      "category": "Software"
+    },
+    {
+      "id": 6,
+      "code": "43230000A2100",
+      "rule": "A001004",
+      "name": "Software - Custom, tangible media",
+      "Description": "Software - Prewritten & delivered by digital keycode printed on tangible media",
+      "category": "Software"
+    },
+    {
+      "id": 7,
       "code": "55111601A2100",
+      "rule": "A001004",
       "name": "Electronic software documentation or user manuals - Custom, tangible media",
+      "Description": "Electronic software documentation or user manuals - For prewritten software & delivered electronically",
       "category": "Documentation"
     },
     {
+      "id": 8,
+      "code": "43230000A2200",
+      "rule": "A001005",
+      "name": "Software - Custom, electronic delivery",
+      "Description": "Software - Custom & delivered on tangible media",
+      "category": "Software"
+    },
+    {
+      "id": 9,
       "code": "55111601A2200",
+      "rule": "A001005",
       "name": "Electronic software documentation or user manuals - Custom, electronic delivery",
+      "Description": "Electronic software documentation or user manuals - For prewritten software & delivered by load and leave",
       "category": "Documentation"
     },
     {
+      "id": 10,
+      "code": "43230000A2300",
+      "rule": "A001006",
+      "name": "Software - Custom, load and leave delivery",
+      "Description": "Software - Custom & delivered electronically",
+      "category": "Software"
+    },
+    {
+      "id": 11,
       "code": "55111601A2300",
+      "rule": "A001006",
       "name": "Electronic software documentation or user manuals - Custom, load and leave delivery",
+      "Description": "Electronic software documentation or user manuals - For custom software & delivered on tangible media",
       "category": "Documentation"
     },
     {
-      "code": "81111501A0000",
-      "name": "Mainframe software applications design",
-      "category": "Services"
+      "id": 12,
+      "code": "81162000A0000",
+      "rule": "A001007",
+      "name": "Cloud-based software as a service (SaaS)",
+      "Description": "Electronic software documentation or user manuals - For custom software & delivered by load and leave",
+      "category": "Software"
     },
     {
-      "code": "81111502A0000",
-      "name": "Personal computer PC application design",
-      "category": "Services"
+      "id": 13,
+      "code": "55111500A1210",
+      "rule": "A001008",
+      "name": "Electronic publications and music - Delivered electronically with permanent rights of usage",
+      "Description": "Software - Custom & delivered by load & leave",
+      "category": "Multimedia"
     },
     {
-      "code": "81111503A0000",
-      "name": "Systems integration design",
-      "category": "Services"
+      "id": 14,
+      "code": "55111500A1220",
+      "rule": "A001009",
+      "name": "Electronic publications and music - Delivered electronically with less than permanent rights of usage",
+      "Description": "Electronic publications and music - Delivered electronically with permanent rights of usage",
+      "category": "Multimedia"
     },
     {
-      "code": "81111504A0000",
-      "name": "Application programming services",
-      "category": "Services"
+      "id": 15,
+      "code": "55111500A1500",
+      "rule": "A001010",
+      "name": "Electronic publications and music - Streamed",
+      "Description": "Electronic publications and music - Delivered electronically with less than permanent rights of usage",
+      "category": "Multimedia"
     },
     {
-      "code": "81111505A0000",
-      "name": "Operating system programming services",
-      "category": "Services"
+      "id": 16,
+      "code": "81112200A1110",
+      "rule": "A001011",
+      "name": "Mandatory, prewritten, tangible media",
+      "Description": "Mandatory maintenance and support charges for prewritten software including items delivered electronically",
+      "category": "Maintenance"
     },
     {
-      "code": "81111506A0000",
-      "name": "Client or server programming services",
-      "category": "Services"
+      "id": 17,
+      "code": "81112200A1210",
+      "rule": "A001012",
+      "name": "Mandatory, prewritten, electronic delivery",
+      "Description": "Mandatory maintenance and support charges for custom software including items delivered electronically",
+      "category": "Maintenance"
     },
     {
-      "code": "81111507A0000",
-      "name": "ERP or database applications programming services",
-      "category": "Services"
+      "id": 18,
+      "code": "81112200A1310",
+      "rule": "A001013",
+      "name": "Mandatory, prewritten, load and leave delivery",
+      "Description": "Optional maintenance and support charges for prewritten software including items delivered electronically (includes software updates/upgrades)",
+      "category": "Maintenance"
     },
     {
-      "code": "81111508A0000",
-      "name": "Application implementation services",
-      "category": "Services"
+      "id": 19,
+      "code": "81112200A2110",
+      "rule": "A001014",
+      "name": "Mandatory, custom, tangible media",
+      "Description": "Optional maintenance and support charges for custom software including items delivered electronically (includes software updates/upgrades)",
+      "category": "Maintenance"
     },
     {
-      "code": "81111509A0000",
-      "name": "Internet or intranet client application development services",
-      "category": "Services"
+      "id": 20,
+      "code": "81112200A2210",
+      "rule": "A001015",
+      "name": "Mandatory, custom, electronic delivery",
+      "Description": "Optional maintenance and support charges for prewritten software including items delivered electronically (includes support services only - no updates/upgrades)",
+      "category": "Maintenance"
     },
     {
-      "code": "81111510A0000",
-      "name": "Internet or intranet server application development services",
-      "category": "Services"
+      "id": 21,
+      "code": "81112200A2310",
+      "rule": "A001016",
+      "name": "Mandatory, custom, load and leave delivery",
+      "Description": "Optional maintenance and support charges for custom software including items delivered electronically (includes support services only - no updates/upgrades)",
+      "category": "Maintenance"
     },
     {
-      "code": "81111511A0000",
-      "name": "System or application programming management service",
-      "category": "Services"
+      "id": 22,
+      "code": "81112200A1121",
+      "rule": "A001017",
+      "name": "Optional, prewritten, tangible media (incl. updates/upgrades)",
+      "Description": "Mandatory maintenance and support charges for prewritten software including items delivered by load and leave",
+      "category": "Maintenance"
     },
     {
-      "code": "81111512A0000",
-      "name": "Computer graphics service",
-      "category": "Services"
+      "id": 23,
+      "code": "81112200A1221",
+      "rule": "A001018",
+      "name": "Optional, prewritten, electronic delivery (incl. updates/upgrades)",
+      "Description": "Mandatory maintenance and support charges for custom software including items delivered by load and leave",
+      "category": "Maintenance"
     },
     {
+      "id": 24,
+      "code": "81112200A1321",
+      "rule": "A001019",
+      "name": "Optional, prewritten, load and leave delivery (incl. updates/upgrades)",
+      "Description": "Optional maintenance and support charges for prewritten software including items delivered by load and leave (includes software updates/upgrades)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 25,
+      "code": "81112200A2121",
+      "rule": "A001020",
+      "name": "Optional, custom, tangible media (incl. updates/upgrades)",
+      "Description": "Optional maintenance and support charges for custom software including items delivered by load and leave (includes software updates/upgrades)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 26,
+      "code": "81112200A2221",
+      "rule": "A001021",
+      "name": "Optional, custom, electronic delivery (incl. updates/upgrades)",
+      "Description": "Optional maintenance and support charges for prewritten software including items delivered by load and leave (includes support services only - no updates/upgrades)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 27,
+      "code": "81112200A2321",
+      "rule": "A001022",
+      "name": "Optional, custom, load and leave delivery (incl. updates/upgrades)",
+      "Description": "Optional maintenance and support charges for custom software including items delivered by load and leave (includes support services only - no updates/upgrades)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 28,
+      "code": "81112200A1122",
+      "rule": "A001023",
+      "name": "Optional, prewritten, tangible media (support services only)",
+      "Description": "Mandatory maintenance and support charges for custom software including items delivered on tangible media",
+      "category": "Maintenance"
+    },
+    {
+      "id": 29,
+      "code": "81112200A1222",
+      "rule": "A001024",
+      "name": "Optional, prewritten, electronic delivery (support services only)",
+      "Description": "Optional maintenance and support charges for prewritten software including items delivered on tangible media (includes software updates/upgrades)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 30,
+      "code": "81111803A0000",
+      "rule": "A001025",
+      "name": "Local area network LAN maintenance or support",
+      "Description": "System installation service",
+      "category": "Maintenance"
+    },
+    {
+      "id": 31,
+      "code": "81111804A0000",
+      "rule": "A001025",
+      "name": "Wide area network WAN maintenance or support",
+      "Description": "Software coding service",
+      "category": "Maintenance"
+    },
+    {
+      "id": 32,
+      "code": "81112200A1322",
+      "rule": "A001025",
+      "name": "Optional, prewritten, load and leave delivery (support services only)",
+      "Description": "Optional maintenance and support charges for custom software including items delivered on tangible media (includes software updates/upgrades)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 33,
+      "code": "81112200A2122",
+      "rule": "A001026",
+      "name": "Optional, custom, tangible media (support services only)",
+      "Description": "Optional maintenance and support charges for prewritten software including items delivered on tangible media (includes support services only - no updates/upgrades)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 34,
+      "code": "81112200A2222",
+      "rule": "A001027",
+      "name": "Optional, custom, electronic delivery (support services only)",
+      "Description": "Optional maintenance and support charges for custom software including items delivered on tangible media (includes support services only - no updates/upgrades)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 35,
+      "code": "81111805A0000",
+      "rule": "A001028",
+      "name": "Proprietary or licensed systems maintenance or support",
+      "Description": "Electronic software documentation or user manuals - For custom software & delivered electronically",
+      "category": "Maintenance"
+    },
+    {
+      "id": 36,
+      "code": "81112200A2322",
+      "rule": "A001028",
+      "name": "Optional, custom, load and leave delivery (support services only)",
+      "Description": "Optional, custom, load and leave delivery (support services only)",
+      "category": "Maintenance"
+    },
+    {
+      "id": 37,
       "code": "81111513A0000",
+      "rule": "A001031",
       "name": "Internet cloud storage service",
+      "Description": "Database design",
       "category": "Services"
     },
     {
-      "code": "81111600A0000",
-      "name": "Computer programmers",
-      "category": "Services"
-    },
-    {
-      "code": "81111701A0000",
-      "name": "Wide area network communications design",
-      "category": "Infrastructure"
-    },
-    {
-      "code": "81111702A0000",
-      "name": "Local area network communications design",
-      "category": "Infrastructure"
-    },
-    {
-      "code": "81111703A0000",
-      "name": "Electronic data interchange EDI design",
-      "category": "Services"
-    },
-    {
-      "code": "81111704A0000",
-      "name": "Database design",
-      "category": "Services"
-    },
-    {
-      "code": "81111705A0000",
-      "name": "Systems architecture",
-      "category": "Services"
-    },
-    {
-      "code": "81111706A0000",
-      "name": "Network planning services",
-      "category": "Services"
-    },
-    {
-      "code": "81111707A0000",
-      "name": "Systems planning services",
-      "category": "Services"
-    },
-    {
+      "id": 38,
       "code": "81111709A0000",
+      "rule": "A001031",
       "name": "Demining geographical or geospatial information system GIS",
+      "Description": "Wide area network WAN maintenance or support",
       "category": "Telecommunications"
     },
     {
+      "id": 39,
       "code": "81111710A0000",
+      "rule": "A001031",
       "name": "Information management system for mine action IMSMA",
+      "Description": "Proprietary or licensed systems maintenance or support",
       "category": "Telecommunications"
     },
     {
+      "id": 40,
       "code": "81111801A0000",
+      "rule": "A001031",
       "name": "Computer or network or internet security",
+      "Description": "Database analysis service",
       "category": "Security"
     },
     {
+      "id": 41,
       "code": "81111802A0000",
+      "rule": "A001031",
       "name": "Mainframe administration services",
+      "Description": "System analysis service",
       "category": "Services"
     },
     {
-      "code": "81111803A0000",
-      "name": "Local area network LAN maintenance or support",
-      "category": "Maintenance"
-    },
-    {
-      "code": "81111804A0000",
-      "name": "Wide area network WAN maintenance or support",
-      "category": "Maintenance"
-    },
-    {
-      "code": "81111805A0000",
-      "name": "Proprietary or licensed systems maintenance or support",
-      "category": "Maintenance"
-    },
-    {
+      "id": 42,
       "code": "81111806A0000",
+      "rule": "A001031",
       "name": "Database analysis service",
+      "Description": "Technical support or help desk services",
       "category": "Services"
     },
     {
+      "id": 43,
       "code": "81111808A0000",
+      "rule": "A001031",
       "name": "System analysis service",
+      "Description": "Co location service",
       "category": "Services"
     },
     {
-      "code": "81111809A0000",
-      "name": "System installation service",
-      "category": "Services"
-    },
-    {
-      "code": "81111810A0000",
-      "name": "Software coding service",
-      "category": "Services"
-    },
-    {
+      "id": 44,
       "code": "81111811A0000",
+      "rule": "A001031",
       "name": "Technical support or help desk services",
+      "Description": "Database information retrieval",
       "category": "Services"
     },
     {
-      "code": "81111814A0000",
-      "name": "Co location service",
-      "category": "Data"
-    },
-    {
+      "id": 45,
       "code": "81111819A0000",
+      "rule": "A001031",
       "name": "Quality assurance services",
+      "Description": "Online database information retrieval service",
       "category": "Services"
     },
     {
+      "id": 46,
       "code": "81111820A0000",
+      "rule": "A001031",
       "name": "System usability services",
+      "Description": "Online data processing service",
       "category": "Services"
     },
     {
+      "id": 47,
       "code": "81111901A0000",
+      "rule": "A001031",
       "name": "Database information retrieval",
+      "Description": "Data processing or preparation services",
       "category": "Data"
     },
     {
+      "id": 48,
       "code": "81111902A0000",
+      "rule": "A001031",
       "name": "Online database information retrieval service",
+      "Description": "Data center services",
       "category": "Services"
     },
     {
+      "id": 49,
       "code": "81112001A0000",
+      "rule": "A001031",
       "name": "Online data processing service",
+      "Description": "Disaster recovery services",
       "category": "Services"
     },
     {
+      "id": 50,
       "code": "81112002A0000",
+      "rule": "A001031",
       "name": "Data processing or preparation services",
+      "Description": "Document scanning service",
       "category": "Services"
     },
     {
-      "code": "81112003A0000",
-      "name": "Data center services",
-      "category": "Services"
-    },
-    {
-      "code": "81112004A0000",
-      "name": "Disaster recovery services",
-      "category": "Services"
-    },
-    {
+      "id": 51,
       "code": "81112005A0000",
+      "rule": "A001031",
       "name": "Document scanning service",
+      "Description": "Data storage service",
       "category": "Services"
     },
     {
+      "id": 52,
       "code": "81112006A0000",
+      "rule": "A001031",
       "name": "Data storage service",
+      "Description": "Content or data standardization services",
       "category": "Services"
     },
     {
+      "id": 53,
       "code": "81112007A0000",
+      "rule": "A001031",
       "name": "Content or data standardization services",
+      "Description": "Content or data classification services",
       "category": "Services"
     },
     {
+      "id": 54,
       "code": "81112009A0000",
+      "rule": "A001031",
       "name": "Content or data classification services",
+      "Description": "Data conversion service",
       "category": "Services"
     },
     {
+      "id": 55,
       "code": "81112010A0000",
+      "rule": "A001031",
       "name": "Data conversion service",
+      "Description": "Mandatory maintenance and support charges for prewritten software including items delivered on tangible media",
       "category": "Services"
     },
     {
-      "code": "81112200A1110",
-      "name": "Software maintenance and support - Mandatory, prewritten, tangible media",
-      "category": "Maintenance"
+      "id": 56,
+      "code": "81111501A0000",
+      "rule": "A001032",
+      "name": "Mainframe software applications design",
+      "Description": "Client or server programming services",
+      "category": "Services"
     },
     {
-      "code": "81112200A1121",
-      "name": "Software maintenance and support - Optional, prewritten, tangible media (incl. updates/upgrades)",
-      "category": "Maintenance"
+      "id": 57,
+      "code": "81111502A0000",
+      "rule": "A001032",
+      "name": "Personal computer PC application design",
+      "Description": "ERP or database applications programming services",
+      "category": "Services"
     },
     {
-      "code": "81112200A1122",
-      "name": "Software maintenance and support - Optional, prewritten, tangible media (support services only)",
-      "category": "Maintenance"
+      "id": 58,
+      "code": "81111503A0000",
+      "rule": "A001032",
+      "name": "Systems integration design",
+      "Description": "Application implementation services",
+      "category": "Services"
     },
     {
-      "code": "81112200A1210",
-      "name": "Software maintenance and support - Mandatory, prewritten, electronic delivery",
-      "category": "Maintenance"
+      "id": 59,
+      "code": "81111504A0000",
+      "rule": "A001032",
+      "name": "Application programming services",
+      "Description": "Internet or intranet client application development services",
+      "category": "Services"
     },
     {
-      "code": "81112200A1221",
-      "name": "Software maintenance and support - Optional, prewritten, electronic delivery (incl. updates/upgrades)",
-      "category": "Maintenance"
+      "id": 60,
+      "code": "81111505A0000",
+      "rule": "A001032",
+      "name": "Operating system programming services",
+      "Description": "Internet or intranet server application development services",
+      "category": "Services"
     },
     {
-      "code": "81112200A1222",
-      "name": "Software maintenance and support - Optional, prewritten, electronic delivery (support services only)",
-      "category": "Maintenance"
+      "id": 61,
+      "code": "81111506A0000",
+      "rule": "A001032",
+      "name": "Client or server programming services",
+      "Description": "System or application programming management service",
+      "category": "Services"
     },
     {
-      "code": "81112200A1310",
-      "name": "Software maintenance and support - Mandatory, prewritten, load and leave delivery",
-      "category": "Maintenance"
+      "id": 62,
+      "code": "81111507A0000",
+      "rule": "A001032",
+      "name": "ERP or database applications programming services",
+      "Description": "Computer graphics service",
+      "category": "Services"
     },
     {
-      "code": "81112200A1321",
-      "name": "Software maintenance and support - Optional, prewritten, load and leave delivery (incl. updates/upgrades)",
-      "category": "Maintenance"
+      "id": 63,
+      "code": "81111508A0000",
+      "rule": "A001032",
+      "name": "Application implementation services",
+      "Description": "Internet cloud storage service",
+      "category": "Services"
     },
     {
-      "code": "81112200A1322",
-      "name": "Software maintenance and support - Optional, prewritten, load and leave delivery (support services only)",
-      "category": "Maintenance"
+      "id": 64,
+      "code": "81111509A0000",
+      "rule": "A001032",
+      "name": "Internet or intranet client application development services",
+      "Description": "Computer programmers",
+      "category": "Services"
     },
     {
-      "code": "81112200A2110",
-      "name": "Software maintenance and support - Mandatory, custom, tangible media",
-      "category": "Maintenance"
+      "id": 65,
+      "code": "81111510A0000",
+      "rule": "A001032",
+      "name": "Internet or intranet server application development services",
+      "Description": "Wide area network communications design",
+      "category": "Services"
     },
     {
-      "code": "81112200A2121",
-      "name": "Software maintenance and support - Optional, custom, tangible media (incl. updates/upgrades)",
-      "category": "Maintenance"
+      "id": 66,
+      "code": "81111511A0000",
+      "rule": "A001032",
+      "name": "System or application programming management service",
+      "Description": "Local area network communications design",
+      "category": "Services"
     },
     {
-      "code": "81112200A2122",
-      "name": "Software maintenance and support - Optional, custom, tangible media (support services only)",
-      "category": "Maintenance"
+      "id": 67,
+      "code": "81111512A0000",
+      "rule": "A001032",
+      "name": "Computer graphics service",
+      "Description": "Electronic data interchange EDI design",
+      "category": "Services"
     },
     {
-      "code": "81112200A2210",
-      "name": "Software maintenance and support - Mandatory, custom, electronic delivery",
-      "category": "Maintenance"
+      "id": 68,
+      "code": "81111600A0000",
+      "rule": "A001032",
+      "name": "Computer programmers",
+      "Description": "Systems architecture",
+      "category": "Services"
     },
     {
-      "code": "81112200A2221",
-      "name": "Software maintenance and support - Optional, custom, electronic delivery (incl. updates/upgrades)",
-      "category": "Maintenance"
+      "id": 69,
+      "code": "81111701A0000",
+      "rule": "A001032",
+      "name": "Wide area network communications design",
+      "Description": "Network planning services",
+      "category": "Infrastructure"
     },
     {
-      "code": "81112200A2222",
-      "name": "Software maintenance and support - Optional, custom, electronic delivery (support services only)",
-      "category": "Maintenance"
+      "id": 70,
+      "code": "81111702A0000",
+      "rule": "A001032",
+      "name": "Local area network communications design",
+      "Description": "Systems planning services",
+      "category": "Infrastructure"
     },
     {
-      "code": "81112200A2310",
-      "name": "Software maintenance and support - Mandatory, custom, load and leave delivery",
-      "category": "Maintenance"
+      "id": 71,
+      "code": "81111703A0000",
+      "rule": "A001032",
+      "name": "Electronic data interchange EDI design",
+      "Description": "Demining geographical or geospatial information system GIS",
+      "category": "Services"
     },
     {
-      "code": "81112200A2321",
-      "name": "Software maintenance and support - Optional, custom, load and leave delivery (incl. updates/upgrades)",
-      "category": "Maintenance"
+      "id": 72,
+      "code": "81111704A0000",
+      "rule": "A001032",
+      "name": "Database design",
+      "Description": "Information management system for mine action IMSMA",
+      "category": "Services"
     },
     {
-      "code": "81112200A2322",
-      "name": "Software maintenance and support - Optional, custom, load and leave delivery (support services only)",
-      "category": "Maintenance"
+      "id": 73,
+      "code": "81111705A0000",
+      "rule": "A001032",
+      "name": "Systems architecture",
+      "Description": "Computer or network or internet security",
+      "category": "Services"
     },
     {
+      "id": 74,
+      "code": "81111706A0000",
+      "rule": "A001032",
+      "name": "Network planning services",
+      "Description": "Mainframe administration services",
+      "category": "Services"
+    },
+    {
+      "id": 75,
+      "code": "81111707A0000",
+      "rule": "A001032",
+      "name": "Systems planning services",
+      "Description": "Local area network LAN maintenance or support",
+      "category": "Services"
+    },
+    {
+      "id": 76,
+      "code": "81111809A0000",
+      "rule": "A001032",
+      "name": "System installation service",
+      "Description": "Quality assurance services",
+      "category": "Services"
+    },
+    {
+      "id": 77,
+      "code": "81111810A0000",
+      "rule": "A001032",
+      "name": "Software coding service",
+      "Description": "System usability services",
+      "category": "Services"
+    },
+    {
+      "id": 78,
+      "code": "81111814A0000",
+      "rule": "Information Technology Administration Services",
+      "name": "Co location service",
+      "Description": "Systems integration design",
+      "category": "Data"
+    },
+    {
+      "id": 79,
+      "code": "81112003A0000",
+      "rule": "Information Technology Administration Services",
+      "name": "Data center services",
+      "Description": "Application programming services",
+      "category": "Services"
+    },
+    {
+      "id": 80,
+      "code": "81112004A0000",
+      "rule": "Information Technology Administration Services",
+      "name": "Disaster recovery services",
+      "Description": "Operating system programming services",
+      "category": "Services"
+    },
+    {
+      "id": 81,
+      "code": "43230000A1100",
+      "rule": "Software - Prewritten, tangible media",
+      "name": "Software - Prewritten, tangible media",
+      "Description": "Mainframe software applications design",
+      "category": "Software"
+    },
+    {
+      "id": 82,
+      "code": "55111601A1100",
+      "rule": "Software - Prewritten, tangible media",
+      "name": "Electronic software documentation or user manuals - Prewritten, tangible media",
+      "Description": "Personal computer PC application design",
+      "category": "Documentation"
+    },
+    {
+      "id": 83,
       "code": "81161900A0000",
-      "name": "Cloud-based — hardware as a service (HaaS)",
+      "rule": "",
+      "name": "Hardware as a service (HaaS)",
+      "Description": "Cloud-based hardware as a service (HaaS)",
       "category": "Hardware"
     },
     {
-      "code": "81162000A0000",
-      "name": "Cloud-based — software as a service (SaaS)",
+      "id": 84,
+      "code": "81162000A9000",
+      "rule": "",
+      "name": "Cloud-based software as a service (SaaS) - Business Use",
+      "Description": "Cloud-based software as a service (SaaS)",
       "category": "Software"
     },
     {
+      "id": 85,
       "code": "81162100A0000",
-      "name": "Cloud-based — platform as a service (PaaS)",
+      "rule": "",
+      "name": "Cloud-based platform as a service (PaaS)",
+      "Description": "Cloud-based platform as a service (PaaS)",
       "category": "Software"
     },
     {
+      "id": 86,
+      "code": "81162100A9000",
+      "rule": "",
+      "name": "Cloud-based platform as a service (PaaS) - Business Use",
+      "Description": "Cloud-based platform as a service (PaaS)",
+      "category": "Software"
+    },
+    {
+      "id": 87,
       "code": "81162200A0000",
-      "name": "Cloud-based — infrastructure as a service (IaaS)",
-      "category": "Software"
+      "rule": "",
+      "name": "Cloud-based infrastructure as a service (IaaS)",
+      "Description": "Cloud-based infrastructure as a service (IaaS)",
+      "category": "As a Service"
     },
     {
+      "id": 88,
+      "code": "81162200A9000",
+      "rule": "",
+      "name": "Cloud-based infrastructure as a service (IaaS) - Business Use",
+      "Description": "Cloud-based infrastructure as a service (IaaS)",
+      "category": "As a Service"
+    },
+    {
+      "id": 89,
       "code": "81162300A0000",
-      "name": "Cloud-based — business process as a service",
-      "category": "Software"
+      "rule": "",
+      "name": "Cloud-based business process as a service",
+      "Description": "Cloud-based business process as a service",
+      "category": "As a Service"
+    },
+    {
+      "id": 90,
+      "code": "81162300A9000",
+      "rule": "",
+      "name": "Cloud-based business process as a service - Business Use",
+      "Description": "Cloud-based business process as a service",
+      "category": "As a Service"
     }
-  ]
+   ]
 }
