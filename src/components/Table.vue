@@ -3,8 +3,10 @@
     <table id="codeTable">
       <colgroup>
         <col span="1" style="width: 3.5%;" />
-        <col span="1" style="width: 71.5;" />
-        <col span="1" style="width: 25%;" />
+        <col span="1" style="width: 66.5;" />
+        <col span="1" style="width: 18%;" />
+        <col span="1" style="width: 5%;" />
+        <col span="1" style="width: 7%;" />
       </colgroup>
       <thead>
         <tr>
@@ -14,8 +16,10 @@
               <label for="selectAll"></label>
             </div>
           </th>
-          <th class="code__name">Name</th>
-          <th class="code__sku">Tax Code</th>
+          <th class="code__name">All Categories</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody id="tableBody">
@@ -30,8 +34,43 @@
               <label :for="item.code"></label>
             </div>
           </td>
-          <td class="code__name" v-on:click="showDetails(item)">{{ item.name }}</td>
-          <td class="code__sku">{{ item.code }}</td>
+          <td class="code__name code__overflow" v-on:click="showDetails(item)">{{ item.name }}</td>
+          <td class="code__sku code__overflow">{{ item.code }}</td>
+          <td class="code__copy" v-on:click="copyCode(item.code)">
+            <svg
+              width="19px"
+              height="22px"
+              viewBox="0 0 19 22"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g
+                id="discovery-(round-5)"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+              >
+                <g id="tax-codes-copy" transform="translate(-1265.000000, -629.000000)">
+                  <g id="file_copy-24px" transform="translate(1264.000000, 629.000000)">
+                    <polygon id="Path" points="0 0 22 0 22 22 0 22" />
+                    <path
+                      class="code__copy--icon"
+                      d="M14.6666667,0.916666667 L3.66666667,0.916666667 C2.65833333,0.916666667 1.83333333,1.74166667 1.83333333,2.75 L1.83333333,15.5833333 L3.66666667,15.5833333 L3.66666667,2.75 L14.6666667,2.75 L14.6666667,0.916666667 Z M13.75,4.58333333 L7.33333333,4.58333333 C6.325,4.58333333 5.50916667,5.40833333 5.50916667,6.41666667 L5.5,19.25 C5.5,20.2583333 6.31583333,21.0833333 7.32416667,21.0833333 L17.4166667,21.0833333 C18.425,21.0833333 19.25,20.2583333 19.25,19.25 L19.25,10.0833333 L13.75,4.58333333 Z M7.33333333,19.25 L7.33333333,6.41666667 L12.8333333,6.41666667 L12.8333333,11 L17.4166667,11 L17.4166667,19.25 L7.33333333,19.25 Z"
+                      id="Shape"
+                      fill="#D6D6D6"
+                      background="#FFFFFF"
+                      fill-rule="nonzero"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </td>
+          <td class="code__favorite">
+            <img src="../assets/favorite.svg" class="code__favorite" />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -59,8 +98,7 @@ export default {
       activeCode: {},
       selectedCodes: [],
       sortedCodes: [],
-      results: [],
-      activeCategory: "Digital & Software"
+      results: []
     };
   },
   props: {
@@ -85,6 +123,15 @@ export default {
     sortCodes() {
       return this.allCodes.sort((a, b) => a.name.localeCompare(b.name));
     },
+    copyCode: function(code) {
+      let temporaryInput = document.createElement("input");
+      temporaryInput.className = "temporaryInput";
+      document.body.appendChild(temporaryInput);
+      temporaryInput.value = code;
+      temporaryInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(temporaryInput);
+    },
     downloadFile: function() {
       let csvContent = "data:text/csv;charset=utf-8,";
       csvContent += [
@@ -99,8 +146,8 @@ export default {
     },
     handleResize() {
       let tableWidth = document.getElementById("codeTable").offsetWidth;
-      let actions = document.querySelector('.actions')
-      actions.style.width = ""
+      let actions = document.querySelector(".actions");
+      actions.style.width = "";
       actions.style.width = tableWidth + "px";
     }
   },
@@ -245,30 +292,33 @@ export default {
       .selectedRow {
         background: $colorBlueLight;
       }
-      .code__name {
+      .code__overflow {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      .code__name {
         color: $colorBlueDark;
       }
       .code__name:hover {
         cursor: pointer;
         text-decoration: underline;
       }
-      .uncategorized {
-        width: 84px !important;
-        background: #eeeeee;
-        color: $colorFontLight;
-        padding: 4px 10px;
-        border-radius: 16px;
-        font-size: 13px;
-        font-weight: $weightMedium;
-      }
-      tr:last-child {
-        border: none;
+      .code__copy:hover {
+        cursor: pointer;
+        .code__copy--icon {
+          fill: $colorFontMedium;
+        }
       }
     }
+    tr:last-child {
+      border: none;
+    }
   }
+}
+
+.temporaryInput {
+  display: none;
 }
 
 /* Checkboxes */
