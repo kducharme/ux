@@ -84,6 +84,8 @@
         <button class="btn btn__secondary">Favorite</button>
       </div>
     </div>
+    <div id="snackbar" class="toast">Code copied to clipboard!</div>
+    <p class="success-message" id="success"></p>
   </div>
 </template>
 
@@ -131,6 +133,18 @@ export default {
       temporaryInput.select();
       document.execCommand("copy");
       document.body.removeChild(temporaryInput);
+      this.showToast();
+    },
+    showToast: function() {
+      let success = document.getElementById("snackbar");
+      success.classList.add("show");
+      setTimeout(function() {
+        success.className = success.className.replace("show", "");
+      }, 2850);
+
+      setTimeout(function() {
+        document.getElementById("success").innerHTML = "";
+      }, 2000);
     },
     downloadFile: function() {
       let csvContent = "data:text/csv;charset=utf-8,";
@@ -319,6 +333,77 @@ export default {
 
 .temporaryInput {
   display: none;
+}
+
+/* // Toast styling */
+
+.toast {
+  visibility: hidden;
+  // min-width: 250px;
+  // margin-left: -125px;
+  background-color: white;
+  border: solid 1px $colorTaxJar;
+  color: $colorTaxJar;
+  border-radius: 3px;
+  text-align: center;
+  padding: 14px;
+  position: fixed;
+  z-index: 1;
+  left: 52%;
+  bottom: 30px;
+  font-family: "lato";
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.toast.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 1s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
 
 /* Checkboxes */
