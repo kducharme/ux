@@ -9,7 +9,7 @@
         <!-- <h1>Product exemptions</h1> -->
       </div>
       <div class="subNav__bottom">
-        <div>Map products</div>
+        <div class="inactive">Map products</div>
         <div class="active">Tax code library</div>
       </div>
     </div>
@@ -18,29 +18,17 @@
     <div class="content">
       <!-- Left column -->
       <div class="column__left">
-        <!-- Header section -->
-        <div class="header">
-          <div class="header__back">
-            <img src="../assets/chevron__back.svg" class="icon" />
-            <p>Back to all</p>
-          </div>
-          <div class="header__icon">
-            <img src="../assets/digital.svg" class="icon" />
-          </div>
-        </div>
-
         <!-- Table filters -->
-        <div class="sticky">
-          <div class="title">
-            <h2>{{ activeCategory }}</h2>
-            <p>Showing {{ this.results }} of {{allCodes.length}} tax codes</p>
+        <div class="title">
+          <h2>Tax code library</h2>
+          <p>Showing {{ this.results }} of {{allCodes.length}} tax codes</p>
+        </div>
+        <div class="filters">
+          <div class="filters__search .align__left">
+            <img src="../assets/search.svg" class="filters__search--icon" />
+            <input type="text" placeholder="Search codes..." v-model="search" />
           </div>
-          <div class="filters">
-            <div class="filters__search">
-              <input type="text" placeholder="Filter codes by name..." v-model="search" />
-            </div>
-            <Filters :allCodes="this.allCodes" />
-          </div>
+          <Filters :allCodes="this.allCodes" />
         </div>
       </div>
 
@@ -70,7 +58,6 @@ export default {
   data() {
     return {
       allCodes: [],
-      activeTab: "all",
       detailsActive: false,
       activeCode: {},
       activeCategory: "Digital & Software",
@@ -113,17 +100,10 @@ export default {
 @import "../styles/variables.scss";
 @import "../styles/mixins.scss";
 
-.filter__title {
-  font-weight: $weightHeavy;
-  color: #88888b;
-  margin-bottom: 16px;
-}
-
 .products {
   height: 100vh;
   .subNav {
     padding: 16px 100px 0px;
-    // background: $grayBackground;
     border-bottom: 1px solid $grayBorder;
     @include display-flex(flex-start, center, column);
     .subNav__top {
@@ -152,9 +132,13 @@ export default {
         margin-left: 2px;
       }
     }
+    .inactive {
+      margin-bottom: 3px;
+    }
     .active {
       color: $colorFontDark;
       border-bottom: 3px solid $colorTaxJar;
+      padding-bottom: -3px;
       font-weight: $weightLight;
     }
     div:hover {
@@ -164,67 +148,52 @@ export default {
 
   .content {
     @include display-flex(flex-start, flex-start, row);
-    padding: 12px 100px 0;
+    padding: 40px 100px 0;
     min-height: calc(100vh - 320px);
     .column__left {
       margin-right: 72px;
       margin-top: 8px;
-      width: 20%;
-      // position: -webkit-sticky;
-      // position: sticky;
-      // top: 24px;
-      .header {
-        .header__back {
-          @include display-flex(flex-start, center, row);
-          color: #939396;
-          margin-bottom: 20px;
-          img {
-            margin-right: 6px;
-          }
+      width: 24%;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 38px;
+
+      .title {
+        margin-top: -12px;
+        margin-bottom: 24px;
+        h2 {
+          font-size: 18px;
+          margin-bottom: 10px;
         }
-        .header__icon {
-          @include display-flex(center, center, row);
-          border: 1px solid $grayBorder;
-          border-radius: 3px;
-          width: 220px;
-          height: 220px;
-          margin-bottom: 24px;
-          img {
-            width: 58%;
-            border: none;
-          }
+        p {
+          font-size: 14px;
+          color: $colorFontLight;
         }
       }
-      .sticky {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0px;
-        .title {
-          margin-bottom: 24px;
-          h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-          }
-          p {
-            font-size: 14px;
-            color: $colorFontLight;
-          }
+      .filters {
+        .filters__search {
+          margin-bottom: 32px;
         }
-        .filters {
-          .filters__search {
-            margin-bottom: 32px;
-            input {
-              height: 40px;
-              width: 220px;
-              padding: 0 12px;
-              font-size: 13px;
-              border-radius: 3px;
-              border: 1px solid $grayBorder;
-            }
-            input:focus {
-              border: 1px solid $colorFontLight;
-            }
-          }
+        .filters__search .filters__search--icon {
+          position: absolute;
+          padding: 13px 12px;
+          pointer-events: none;
+        }
+        .filters__search--icon {
+          left: 0px;
+        }
+        input {
+          height: 40px;
+          width: 256px;
+          padding: 0 12px;
+          font-size: 13px;
+          border-radius: 3px;
+          border: 1px solid $grayBorder;
+          padding-left: 32px;
+        }
+        input:focus {
+          border: 1px solid $colorTaxJar;
+          transition: ease-in-out, border-color 0.2s ease-in-out;
         }
       }
     }
