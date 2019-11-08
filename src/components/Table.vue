@@ -117,7 +117,7 @@
         <button class="btn btn__secondary">Favorite</button>
       </div>
     </div>
-    <div id="snackbar" class="toast">Code copied to clipboard!</div>
+    <div id="snackbar" class="toast">Code copied to clipboard</div>
     <p class="success-message" id="success"></p>
   </div>
 </template>
@@ -396,11 +396,9 @@ export default {
 
 .toast {
   visibility: hidden;
-  // min-width: 250px;
-  // margin-left: -125px;
-  background-color: white;
-  border: solid 1px $colorTaxJar;
-  color: $colorTaxJar;
+  background-color: #2D3047;
+  // border: solid 1px $colorTaxJar;
+  color: white;
   border-radius: 3px;
   text-align: center;
   padding: 14px;
