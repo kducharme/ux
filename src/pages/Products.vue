@@ -6,7 +6,7 @@
     <!-- Page subnavigation -->
     <div class="subNav">
       <div class="subNav__top">
-        <!-- <h1>Product exemptions</h1> -->
+        <h1>{{ this.activePage }}</h1>
       </div>
       <div class="subNav__bottom">
         <div class="inactive">Map products</div>
@@ -18,22 +18,6 @@
     <div class="content">
       <!-- Left column -->
       <div class="column__left">
-        <!-- Table filters -->
-        <div class="title">
-          <h2>Tax code library</h2>
-          <p>Showing {{ this.results }} of {{allCodes.length}} tax codes</p>
-        </div>
-        <div class="filters">
-          <div class="filters__search .align__left">
-            <img src="../assets/search.svg" class="filters__search--icon" />
-            <input type="text" placeholder="Search codes..." v-model="search" />
-          </div>
-          <Filters :allCodes="this.allCodes" />
-        </div>
-      </div>
-
-      <!-- Right column -->
-      <div class="column__right">
         <Table
           @showDetails="showDetails"
           @activeCode="codeDetails"
@@ -41,6 +25,21 @@
           :allCodes="this.allCodes"
           :searchTerm="this.search"
         />
+      </div>
+
+      <!-- Right column -->
+      <div class="column__right">
+        <!-- Table filters -->
+        <div class="title"></div>
+        <div class="filters">
+          <p class="filters__title">Search tax codes</p>
+          <div class="filters__search .align__left">
+            <img src="../assets/search.svg" class="filters__search--icon" />
+            <input type="text" placeholder="Search codes..." v-model="search" />
+          </div>
+          <p class="filters__title">Filter by category</p>
+          <Filters :allCodes="this.allCodes" />
+        </div>
       </div>
     </div>
   </div>
@@ -60,6 +59,7 @@ export default {
       allCodes: [],
       detailsActive: false,
       activeCode: {},
+      activePage: "Product Taxability",
       activeCategory: "Digital & Software",
       search: "",
       results: 0
@@ -103,7 +103,7 @@ export default {
 .products {
   height: 100vh;
   .subNav {
-    padding: 16px 100px 0px;
+    padding: 20px 100px 0px;
     border-bottom: 1px solid $grayBorder;
     @include display-flex(flex-start, center, column);
     .subNav__top {
@@ -111,7 +111,7 @@ export default {
       h1 {
         font-size: 18px;
         color: $colorFontDark;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
       }
     }
   }
@@ -150,27 +150,24 @@ export default {
     @include display-flex(flex-start, flex-start, row);
     padding: 40px 100px 0;
     min-height: calc(100vh - 320px);
-    .column__left {
-      margin-right: 72px;
-      margin-top: 8px;
-      width: 24%;
+    background: $grayBackground;
+    .column__right {
+      border: 1px solid $grayBorder;
+      padding: 24px;
+      background: white;
+      width: 28%;
       position: -webkit-sticky;
       position: sticky;
       top: 38px;
-
-      .title {
-        margin-top: -12px;
-        margin-bottom: 24px;
-        h2 {
-          font-size: 18px;
-          margin-bottom: 10px;
-        }
-        p {
-          font-size: 14px;
-          color: $colorFontLight;
-        }
-      }
+      margin-left: 40px;
       .filters {
+        width: 100%;
+        .filters__title {
+          font-weight: $weightHeavy;
+          color: $colorFontMedium;
+          margin-bottom: 16px;
+          font-size: 13px;
+        }
         .filters__search {
           margin-bottom: 32px;
         }
@@ -180,12 +177,11 @@ export default {
           pointer-events: none;
         }
         .filters__search--icon {
-          left: 0px;
+          left: 22px;
         }
         input {
           height: 40px;
-          width: 256px;
-          padding: 0 12px;
+          width: 100%;
           font-size: 13px;
           border-radius: 3px;
           border: 1px solid $grayBorder;
@@ -197,7 +193,7 @@ export default {
         }
       }
     }
-    .column__right {
+    .column__left {
       width: 80%;
     }
   }

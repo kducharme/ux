@@ -247,7 +247,6 @@ export default {
     height: 72px;
     background: white;
     border: 1px solid $grayBorder;
-    // position: -webkit-sticky;
     padding: 0 16px;
     box-shadow: 0 -2px 2px -2px rgba(0, 0, 0, 0.15);
     bottom: 0px;
@@ -316,6 +315,7 @@ export default {
   // Table styling
   table {
     width: 100%;
+    background: white;
     border: 1px solid $grayBorder;
     table-layout: fixed;
     border-spacing: 0px;
@@ -326,8 +326,8 @@ export default {
     thead {
       text-align: left;
       border: none !important;
-      background: $grayBackground;
-      border-bottom: 1px solid $grayBorder;
+      border-bottom: 1p
+      x solid $grayBorder;
       color: $colorFontLight;
       font-weight: $weightHeavy;
       tr {

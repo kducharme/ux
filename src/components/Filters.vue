@@ -1,6 +1,5 @@
 <template>
   <div class="tableFilters">
-    <p class="tableFilters__title">Filter by category</p>
     <div
       class="filter"
       v-for="category in allCategories"
@@ -67,19 +66,13 @@ export default {
 @import "../styles/mixins.scss";
 
 .tableFilters {
-  margin-top: 32px;
-  width: 256px;
+  width: 100%;
   @include display-flex(flex-start, flex-start, column);
-  .tableFilters__title {
-    font-weight: $weightHeavy;
-    color: #88888b;
-    margin-bottom: 16px;
-  }
   .filter {
     width: 100%;
     @include display-flex(space-between, center, row);
     .filter__name {
-      color: $colorFontMedium;
+      color: #88888B;
       padding: 12px 0;
     }
     .filter__count {
@@ -88,7 +81,7 @@ export default {
       border: 1px solid $grayBorder;
       font-size: 13px;
       border-radius: 12px;
-      width: 52px;
+      width: 44px;
       height: 22px;
     }
 
