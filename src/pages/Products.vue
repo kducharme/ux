@@ -3,16 +3,10 @@
   <div class="products">
     <Details :details="this.detailsActive" :code="this.activeCode" @hideDetails="hideDetails" />
 
-    <!-- Page subnavigation -->
-    <div class="subNav">
-      <div class="subNav__top">
-        <h1>{{ this.activePage }}</h1>
-      </div>
-      <div class="subNav__bottom">
-        <div class="inactive">Map products</div>
-        <div class="active">Tax code library</div>
-      </div>
-    </div>
+    <!-- Page header -->
+    <Header
+      :headerContent="this.headerContent"
+    />
 
     <!-- Main content -->
     <div class="content">
@@ -50,10 +44,11 @@ import { mapState, mapActions } from "vuex";
 import Table from "../components/Table.vue";
 import Filters from "../components/Filters.vue";
 import Details from "../components/Details.vue";
+import Header from "../components/Header.vue";
 
 export default {
   name: "products",
-  components: { Table, Filters, Details },
+  components: { Table, Filters, Details, Header },
   data() {
     return {
       allCodes: [],
@@ -62,7 +57,12 @@ export default {
       activePage: "Product Taxability",
       activeCategory: "Digital & Software",
       search: "",
-      results: 0
+      results: 0,
+      headerContent: {
+        title: "Product exemptions",
+        tabOne: "Map produdcts",
+        tabTwo: "Tax code library"
+      }
     };
   },
   methods: {
@@ -102,50 +102,6 @@ export default {
 
 .products {
   height: 100vh;
-  .subNav {
-    padding: 20px 100px 0px;
-    border-bottom: 1px solid $grayBorder;
-    @include display-flex(flex-start, center, column);
-    .subNav__top {
-      width: 100%;
-      h1 {
-        font-size: 18px;
-        color: $colorFontDark;
-        margin-bottom: 24px;
-      }
-    }
-  }
-  .subNav__bottom {
-    @include display-flex(flex-start, center, row);
-    width: 100%;
-    div {
-      font-size: 14px;
-      color: #88888b;
-      margin-right: 24px;
-      padding-bottom: 16px;
-      span {
-        background: $grayBorder;
-        padding: 2px 4px;
-        font-size: 12px;
-        font-weight: $weightMedium;
-        border-radius: 5px;
-        margin-left: 2px;
-      }
-    }
-    .inactive {
-      margin-bottom: 3px;
-    }
-    .active {
-      color: $colorFontDark;
-      border-bottom: 3px solid $colorTaxJar;
-      padding-bottom: -3px;
-      font-weight: $weightLight;
-    }
-    div:hover {
-      cursor: pointer;
-    }
-  }
-
   .content {
     @include display-flex(flex-start, flex-start, row);
     padding: 40px 100px 0;
@@ -164,8 +120,8 @@ export default {
         width: 100%;
         .filters__title {
           font-weight: $weightHeavy;
-          color: $colorFontMedium;
-          margin-bottom: 16px;
+          color: $colorFontLight;
+          margin-bottom: 12px;
           font-size: 13px;
         }
         .filters__search {
