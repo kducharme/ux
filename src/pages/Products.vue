@@ -105,7 +105,7 @@ export default {
   .content {
     @include display-flex(flex-start, flex-start, row);
     padding: 40px 100px 0;
-    min-height: calc(100vh - 320px);
+    min-height: calc(100vh - 175px);
     background: $grayBackground;
     .column__right {
       border: 1px solid $grayBorder;

@@ -404,7 +404,7 @@ export default {
   padding: 14px;
   position: fixed;
   z-index: 1;
-  left: 52%;
+  left: 45%;
   bottom: 30px;
   font-family: "lato";
   font-size: 14px;
