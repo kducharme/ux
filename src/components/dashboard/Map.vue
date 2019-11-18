@@ -11,14 +11,14 @@
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
+          id="nexusMap"
         >
           <path
             d="M240.823893,56.7614373 L242.070638,59.729633 L242.115695,59.9044709 L242.378572,62.4228636 L242.795707,64.0090697 L242.037089,64.054319 L240.11593,64.1686373 L230.644106,64.4526449 L207.845206,64.622671 L183.150218,63.9410846 L180.347252,63.795323 L180.377848,63.1748401 L180.489806,60.9043204 L181.385292,43.083882 L182.112146,29.2545805 L182.184557,26.3185625 L182.848026,26.3797218 L183.430266,26.4342942 L195.284624,26.8879828 L205.403016,27.1148277 L217.195734,27.1716935 L234.09665,26.8312026 L234.109199,26.8310762 L235.757863,26.8310812 L235.884587,27.2872621 L237.018583,31.3836407 L239.365708,45.8924792 L240.49496,51.7582169 L240.823893,56.7614373 Z"
-            id="ND"
+            id="MA"
             stroke="#FFFFFF"
             stroke-width="1.1"
             fill="#E6E6E6"
-            :class="[nexusStates.includes('ND') ? 'nexus' : '']"
           />
           <polygon
             id="OR"
@@ -464,9 +464,45 @@ export default {
   components: {},
   data() {
     return {
-      nexusStates: ["ND"]
+      userStates: [
+        {
+          id: 1,
+          state: "MA",
+          type: "nexus"
+        },
+        {
+          id: 2,
+          state: "TN",
+          type: "issue"
+        },
+        {
+          id: 3,
+          state: "WA",
+          type: "marketplace"
+        },
+        {
+          id: 4,
+          state: "CA",
+          type: "nexus"
+        }
+      ]
     };
-  }
+  },
+  methods: {
+      completeMap: function() {
+          const states = document.querySelector('#nexusMap').childNodes;
+          states.forEach(s => {
+              this.userStates.forEach(u => {
+                  if (s.id === u.state) {
+                      document.querySelector(`#${s.id}`).classList.add('nexus')
+                  }
+              })
+          })
+      }
+  },
+    mounted() {
+        this.completeMap()
+  },
 };
 </script>
 
@@ -501,7 +537,7 @@ export default {
       height: 280px;
     }
     .nexus {
-      fill: #A3D8AE;
+      fill: #a3d8ae;
     }
   }
   .map__right {
