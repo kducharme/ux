@@ -489,20 +489,31 @@ export default {
     };
   },
   methods: {
-      completeMap: function() {
-          const states = document.querySelector('#nexusMap').childNodes;
-          states.forEach(s => {
-              this.userStates.forEach(u => {
-                  if (s.id === u.state) {
-                      document.querySelector(`#${s.id}`).classList.add('nexus')
-                  }
-              })
-          })
-      }
+    completeMap: function() {
+      const states = document.querySelector("#nexusMap").childNodes;
+      states.forEach(s => {
+        this.userStates.forEach(u => {
+          if (s.id === u.state) {
+            switch (u.type) {
+              case "nexus":
+                document.querySelector(`#${s.id}`).classList.add("nexus");
+                break;
+              case "marketplace":
+                document.querySelector(`#${s.id}`).classList.add("marketplace");
+                break;
+              case "issue":
+                document.querySelector(`#${s.id}`).classList.add("issue");
+              default:
+            }
+            
+          }
+        });
+      });
+    }
   },
-    mounted() {
-        this.completeMap()
-  },
+  mounted() {
+    this.completeMap();
+  }
 };
 </script>
 
@@ -538,6 +549,12 @@ export default {
     }
     .nexus {
       fill: #a3d8ae;
+    }
+    .marketplace {
+      fill: #B3BCD5;
+    }
+    .issue {
+      fill: #EFC5C7;
     }
   }
   .map__right {
