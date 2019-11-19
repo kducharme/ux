@@ -1,11 +1,11 @@
 <template>
   <div class="map">
-    <div class="map__left">
-      <div class="map__left--title">
+    <div class="map__layout">
+      <div class="map__layout--title">
         <p class="subTitle">Overview</p>
-        <p class="title">States where your business has, or may have, a presence (ie. nexus)</p>
+        <p class="title">States where your business has a presence (ie. nexus)</p>
       </div>
-      <div class="map__left--map">
+      <div class="map__layout--map">
         <svg
           viewBox="0 0 481 294"
           version="1.1"
@@ -15,7 +15,7 @@
         >
           <path
             d="M240.823893,56.7614373 L242.070638,59.729633 L242.115695,59.9044709 L242.378572,62.4228636 L242.795707,64.0090697 L242.037089,64.054319 L240.11593,64.1686373 L230.644106,64.4526449 L207.845206,64.622671 L183.150218,63.9410846 L180.347252,63.795323 L180.377848,63.1748401 L180.489806,60.9043204 L181.385292,43.083882 L182.112146,29.2545805 L182.184557,26.3185625 L182.848026,26.3797218 L183.430266,26.4342942 L195.284624,26.8879828 L205.403016,27.1148277 L217.195734,27.1716935 L234.09665,26.8312026 L234.109199,26.8310762 L235.757863,26.8310812 L235.884587,27.2872621 L237.018583,31.3836407 L239.365708,45.8924792 L240.49496,51.7582169 L240.823893,56.7614373 Z"
-            id="MA"
+            id="ND"
             stroke="#FFFFFF"
             stroke-width="1.1"
             fill="#E6E6E6"
@@ -452,8 +452,52 @@
         </svg>
       </div>
     </div>
-    <div class="map__right">
-      <p class="subTitle">Nexus breakdown</p>
+    <div class="map__details">
+      <p class="title">Nexus breakdown</p>
+      <div class="categories">
+        <div class="category category__first">
+          <div class="row row__totals">
+            <div class="row__totals--left">
+              <span class="color color__nexus"></span>
+              <p>Nexus states</p>
+            </div>
+            <div class="row__totals--right">
+              <p class="nexus__totals--count">21</p>
+            </div>
+          </div>
+          <div class="row row__details">
+            <p>Manual file</p>
+            <p>12</p>
+          </div>
+          <div class="row row__details">
+            <p>AutoFile</p>
+            <p>4</p>
+          </div>
+          <div class="row row__details">
+            <p>Marketplace facilitator</p>
+            <p>3</p>
+          </div>
+        </div>
+        <div class="category">
+          <div class="row row__totals">
+            <div class="row__totals--left">
+              <span class="color color__issue"></span>
+              <p>Issue states</p>
+            </div>
+            <div class="row__totals--right">
+              <p class="nexus__totals--count">3</p>
+            </div>
+          </div>
+          <div class="row row__details">
+            <p>Not collecting</p>
+            <p>2</p>
+          </div>
+          <div class="row row__details">
+            <p>Approaching nexus</p>
+            <p>1</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -464,35 +508,14 @@ export default {
   components: {},
   data() {
     return {
-      userStates: [
-        {
-          id: 1,
-          state: "MA",
-          type: "nexus"
-        },
-        {
-          id: 2,
-          state: "TN",
-          type: "issue"
-        },
-        {
-          id: 3,
-          state: "WA",
-          type: "marketplace"
-        },
-        {
-          id: 4,
-          state: "CA",
-          type: "nexus"
-        }
-      ]
+      allStates: []
     };
   },
   methods: {
-    completeMap: function() {
+    populateMap: function() {
       const states = document.querySelector("#nexusMap").childNodes;
       states.forEach(s => {
-        this.userStates.forEach(u => {
+        this.allStates.forEach(u => {
           if (s.id === u.state) {
             switch (u.type) {
               case "nexus":
@@ -505,14 +528,22 @@ export default {
                 document.querySelector(`#${s.id}`).classList.add("issue");
               default:
             }
-            
           }
         });
       });
+    },
+    getUserStates: function() {
+      fetch(`http://localhost:3000/states`)
+        .then(r => r.json())
+        .then(states => {
+          this.allStates = states;
+          console.log(this.allStates);
+          this.populateMap();
+        });
     }
   },
   mounted() {
-    this.completeMap();
+    this.getUserStates();
   }
 };
 </script>
@@ -527,16 +558,16 @@ export default {
   background: white;
   width: 100%;
   padding: 32px;
-  .map__left {
+  .map__layout {
     @include display-flex(flex-start, flex-start, column);
-    width: 50%;
-    .map__left--title {
+    width: 47%;
+    .map__layout--title {
       @include display-flex(flex-start, flex-start, column);
       margin-bottom: 32px;
       .subTitle {
         font-size: 14px;
         color: $colorFontLight;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
       }
       .title {
         font-size: 15px;
@@ -548,16 +579,65 @@ export default {
       height: 280px;
     }
     .nexus {
-      fill: #a3d8ae;
+      fill: #2d3047;
     }
     .marketplace {
-      fill: #B3BCD5;
+      fill: #2d3047;
     }
     .issue {
-      fill: #EFC5C7;
+      fill: #ae4646;
     }
   }
-  .map__right {
+  .map__details {
+    @include display-flex(flex-start, flex-start, column);
+    width: 50%;
+    padding: 0 32px;
+    .title {
+      margin-top: 30px;
+    }
+    .categories {
+      margin-top: 32px;
+      @include display-flex(flex-start, flex-start, column);
+      width: 100%;
+      .category {
+        width: 100%;
+        @include display-flex(flex-start, space-between, column);
+        .row {
+          @include display-flex(space-between, flex-start, row);
+        }
+        .row__totals {
+          @include display-flex(space-between, center, row);
+          color: $colorFontMedium;
+          padding-bottom: 12px;
+          align-content: left;
+          .row__totals--left {
+            @include display-flex(flex-start, flex-start, row);
+            .color {
+              border-radius: 3px;
+              margin-right: 12px;
+              height: 16px;
+              width: 16px;
+            }
+            .color__nexus {
+              background: #2d3047;
+            }
+            .color__issue {
+              background: #ae4646;
+            }
+          }
+        }
+        .row__details {
+          color: $colorFontLight;
+          padding: 10px 0;
+          margin-left: 28px;
+        }
+      }
+    }
+    .category__first {
+      border-bottom: 1px solid $grayBorder;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
   }
 }
 </style>
