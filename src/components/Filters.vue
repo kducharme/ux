@@ -13,7 +13,7 @@
       <p
         class="filter__count"
         :class="[activeCategory === category ? 'filter__active filter__active--count' : '']"
-      >32</p>
+      >44</p>
     </div>
   </div>
 </template>
@@ -26,17 +26,16 @@ export default {
   data() {
     return {
       uniqueCategories: [],
-      activeCategory: "All Categories",
+      activeCategory: "All Tax Codes",
       allCategories: [
-        "All Categories",
+        "All Tax Codes",
+        "Favorites",
         "Clothing",
         "Digital & Software",
         "Food & Beverage",
-        "Manufacturing",
-        "Medical",
-        "Miscenllaneous",
-        "Telecommunications"
-      ]
+        "Medical & Healthcare",
+        "services"
+      ],
     };
   },
   props: {
@@ -48,6 +47,9 @@ export default {
     setActiveCategory: function(category) {
       this.activeCategory = category;
       console.log(this.activeCategory);
+    },
+    getRandomNum: function() {
+      return Math.floor(Math.random() * Math.floor(100));
     }
   },
   computed: {
@@ -72,7 +74,7 @@ export default {
     width: 100%;
     @include display-flex(space-between, center, row);
     .filter__name {
-      color: #88888B;
+      color: #88888b;
       padding: 12px 0;
     }
     .filter__count {

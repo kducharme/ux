@@ -1,18 +1,27 @@
 <template>
   <div class="dashboard">
-      <Modal />
+    <Header :headerContent="this.headerContent" />
+    <div class="content">
+      <Map />
+    </div>
   </div>
 </template>
 
 <script>
-import Modal from "../components/Modal.vue";
+import Header from "../components/Header.vue";
+import Map from "../components/dashboard/Map.vue";
 
 export default {
   name: "dashboard",
-  components: { Modal },
+  components: { Header, Map },
   data() {
     return {
-      activeTab: "all"
+      headerContent: {
+        title: "Dashboard",
+        tabOne: "Overview",
+        tabTwo: "State summaries",
+        tabThree: "Account activity"
+      }
     };
   },
   methods: {}
@@ -24,10 +33,15 @@ export default {
 @import "../styles/mixins.scss";
 
 .dashboard {
-  @include display-flex(flex-start, flex-start, row);
-    height: calc(100vh - 60px);
-//   padding: 60px 200px 0;
-//   background: $colorFontLight;
-
+  @include display-flex(flex-start, flex-start, column);
+  height: calc(100vh - 60px);
+  width: 100vw;
+  .content {
+    @include display-flex(flex-start, center, column);
+    padding: 40px 100px 0px;
+    background: $grayBackground;
+    min-height: calc(100vh - 175px);
+    width: 100%;
+  }
 }
 </style>
