@@ -519,13 +519,13 @@ export default {
       states.forEach(s => {
         this.allStates.forEach(u => {
           if (
-            s.id.includes(u.state) ||
-            s.id.includes(`${u.state}-alt1`) ||
-            s.id.includes(`${u.state}-alt2`) ||
-            s.id.includes(`${u.state}-alt3`) ||
-            s.id.includes(`${u.state}-alt4`) ||
-            s.id.includes(`${u.state}-alt5`) ||
-            s.id.includes(`${u.state}-alt6`)
+            s.id.toLowerCase() === (u.state) ||
+            s.id.toLowerCase() === (`${u.state}-alt1`) ||
+            s.id.toLowerCase() === (`${u.state}-alt2`) ||
+            s.id.toLowerCase() === (`${u.state}-alt3`) ||
+            s.id.toLowerCase() === (`${u.state}-alt4`) ||
+            s.id.toLowerCase() === (`${u.state}-alt5`) ||
+            s.id.toLowerCase() === (`${u.state}-alt6`)
           ) {
             switch (u.type) {
               case "nexus":

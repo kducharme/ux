@@ -52,7 +52,7 @@ export default {
 @import "../styles/variables.scss";
 @import "../styles/mixins.scss";
 
-.dashboard {
+.dashboard { 
   @include display-flex(flex-start, flex-start, column);
   min-height: calc(100vh - 60px);
   width: 100vw;
