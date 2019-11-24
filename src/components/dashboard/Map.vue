@@ -2,8 +2,8 @@
   <div class="map">
     <div class="map__layout">
       <div class="map__layout--title">
-        <p class="subTitle">Overview</p>
-        <p class="title">States where your business has a presence (ie. nexus)</p>
+        <p class="title">Nexus insights</p>
+        <p class="subTitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
       </div>
       <div class="map__layout--map">
         <svg
@@ -455,51 +455,6 @@
       </div>
     </div>
     <div class="map__details">
-      <p class="title">Nexus breakdown</p>
-      <div class="categories">
-        <div class="category category__first">
-          <div class="row row__totals">
-            <div class="row__totals--left">
-              <span class="color color__nexus"></span>
-              <p>Nexus states</p>
-            </div>
-            <div class="row__totals--right">
-              <p class="nexus__totals--count">21</p>
-            </div>
-          </div>
-          <div class="row row__details">
-            <p>Manual file</p>
-            <p>12</p>
-          </div>
-          <div class="row row__details">
-            <p>AutoFile</p>
-            <p>4</p>
-          </div>
-          <div class="row row__details">
-            <p>Marketplace facilitator</p>
-            <p>3</p>
-          </div>
-        </div>
-        <div class="category">
-          <div class="row row__totals">
-            <div class="row__totals--left">
-              <span class="color color__issue"></span>
-              <p>Issue states</p>
-            </div>
-            <div class="row__totals--right">
-              <p class="nexus__totals--count">3</p>
-            </div>
-          </div>
-          <div class="row row__details">
-            <p>Not collecting</p>
-            <p>2</p>
-          </div>
-          <div class="row row__details">
-            <p>Approaching nexus</p>
-            <p>1</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -519,13 +474,13 @@ export default {
       states.forEach(s => {
         this.allStates.forEach(u => {
           if (
-            s.id.toLowerCase() === (u.state) ||
-            s.id.toLowerCase() === (`${u.state}-alt1`) ||
-            s.id.toLowerCase() === (`${u.state}-alt2`) ||
-            s.id.toLowerCase() === (`${u.state}-alt3`) ||
-            s.id.toLowerCase() === (`${u.state}-alt4`) ||
-            s.id.toLowerCase() === (`${u.state}-alt5`) ||
-            s.id.toLowerCase() === (`${u.state}-alt6`)
+            s.id.toLowerCase() === u.state ||
+            s.id.toLowerCase() === `${u.state}-alt1` ||
+            s.id.toLowerCase() === `${u.state}-alt2` ||
+            s.id.toLowerCase() === `${u.state}-alt3` ||
+            s.id.toLowerCase() === `${u.state}-alt4` ||
+            s.id.toLowerCase() === `${u.state}-alt5` ||
+            s.id.toLowerCase() === `${u.state}-alt6`
           ) {
             switch (u.type) {
               case "nexus":
@@ -547,7 +502,7 @@ export default {
       states.forEach(s => {
         s.addEventListener("mouseover", e => {
           document.querySelector(`#${e.target.id}`).classList.add("hover");
-          this.parentNode.append(this)
+          this.parentNode.append(this);
         });
         s.addEventListener("mouseleave", e => {
           document.querySelector(`#${e.target.id}`).classList.remove("hover");
@@ -577,6 +532,7 @@ export default {
 .map {
   @include display-flex(flex-start, flex-start, row);
   border: 1px solid $grayBorder;
+  border-radius: 3px;
   background: white;
   width: 100%;
   padding: 32px;
@@ -586,19 +542,19 @@ export default {
     .map__layout--title {
       @include display-flex(flex-start, flex-start, column);
       margin-bottom: 32px;
+      .title {
+        font-size: 16px;
+        font-weight: $weightHeavy;
+        color: $colorFontDark;
+        margin-bottom: 6px;
+      }
       .subTitle {
         font-size: 14px;
         color: $colorFontLight;
-        margin-bottom: 12px;
-      }
-      .title {
-        font-size: 15px;
-        font-weight: $weightHeavy;
-        color: $colorFontDark;
       }
     }
     svg {
-      height: 280px;
+      height: 262px;
     }
     .nexus {
       fill: #2d3047;
@@ -609,16 +565,13 @@ export default {
     .issue {
       fill: #ae4646;
     }
-    .hover {
-    //   stroke-width: 2;
-    //   stroke: red;
-    //   z-index: 99999;
-    }
   }
   .map__details {
     @include display-flex(flex-start, flex-start, column);
     width: 50%;
+    height: 100%;
     padding: 0 32px;
+    // border: 1px solid $grayBorder;
     .title {
       margin-top: 30px;
     }

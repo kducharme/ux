@@ -1,27 +1,9 @@
 <template>
-  <div class="card">
-    <img
-      :src="require(`../../assets/states/` + state.state + `.svg`)"
-      class="card__icon"
-      :class="state.state"
-    />
-    <p class="card__name">{{state.name}}</p>
-    <div class="state-data">
-      <p class="state-data__label">Filing frequency:</p>
-      <p class="state-data__value">{{state.filing.frequency}}</p>
-    </div>
-    <div class="state-data">
-      <p class="state-data__label">Current period:</p>
-      <p class="state-data__value">{{state.filing.period}}</p>
-    </div>
-    <div class="state-data">
-      <p class="state-data__label">Sales tax due:</p>
-      <p class="state-data__value">${{state.filing.tax}}</p>
-    </div>
-    <div class="state-data">
-      <p class="state-data__label">Filing status</p>
-      <p class="state-data__value">{{state.filing.method}}</p>
-    </div>
+  <div class="table">
+      <div class="table table__nexus">
+          <p class="title">Registered nexus</p>
+          
+      </div>
   </div>
 </template>
 

@@ -3,8 +3,15 @@
     <Header :headerContent="this.headerContent" />
     <div class="content">
       <Map />
-      <div class="content__cards">
-        <StateCard v-for="state in allStates" :key="state.id" :state="state" />
+      <div class="content__details">
+        <!-- <StateCard v-for="state in allStates" :key="state.id" :state="state" /> -->
+        <div class="content__details--title">
+          <p class="title">State details</p>
+          <p
+            class="subTitle"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+        </div>
+        <StateTable />
       </div>
     </div>
   </div>
@@ -14,10 +21,11 @@
 import Header from "../components/Header.vue";
 import Map from "../components/dashboard/Map.vue";
 import StateCard from "../components/dashboard/StateCard.vue";
+import StateTable from "../components/dashboard/StateTable.vue";
 
 export default {
   name: "dashboard",
-  components: { Header, Map, StateCard },
+  components: { Header, Map, StateCard, StateTable },
   data() {
     return {
       headerContent: {
@@ -52,7 +60,7 @@ export default {
 @import "../styles/variables.scss";
 @import "../styles/mixins.scss";
 
-.dashboard { 
+.dashboard {
   @include display-flex(flex-start, flex-start, column);
   min-height: calc(100vh - 60px);
   width: 100vw;
@@ -62,11 +70,28 @@ export default {
     background: $grayBackground;
     min-height: calc(100vh - 175px);
     width: 100%;
-    .content__cards {
-      @include display-flex(space-between, center, row);
-      flex-wrap: wrap;
-      margin-top: 32px;
+    .content__details {
+      border: 1px solid $grayBorder;
+      border-radius: 3px;
+      background: white;
+      margin-top: 24px;
       width: 100%;
+      height: 100%;
+      padding: 32px;
+      .content__details--title {
+        @include display-flex(flex-start, flex-start, column);
+        margin-bottom: 32px;
+        .title {
+          font-size: 16px;
+          font-weight: $weightHeavy;
+          color: $colorFontDark;
+          margin-bottom: 6px;
+        }
+        .subTitle {
+          font-size: 14px;
+          color: $colorFontLight;
+        }
+      }
     }
   }
 }
