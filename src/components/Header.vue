@@ -42,7 +42,7 @@ export default {
     h1 {
       font-size: 18px;
       color: $colorFontDark;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
   }
   .header__bottom {
@@ -52,7 +52,7 @@ export default {
       font-size: 14px;
       color: #88888b;
       margin-right: 28px;
-      padding-bottom: 16px;
+      padding-bottom: 12px;
     }
     .inactive {
       margin-bottom: 3px;
